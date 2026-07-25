@@ -53,42 +53,68 @@ The case permits only two assistive AI capabilities:
 
 AI may not diagnose, determine urgency, match identity, acknowledge a result, choose a pathway, approve or send a referral, accept a referral, confirm a next step or close an episode. Every AI output is a reviewable draft with source references, uncertainty handling and a manual fallback.
 
+## Prototype implementation boundary
+
+Sprint 6 will build a real interactive frontend backed by project-controlled synthetic JSON, deterministic workflow logic, pre-written AI outputs and visible prototype audit evidence.
+
+The prototype will not use a production backend, live hospital API, real AI/model call or source-system write-back. Its purpose is to demonstrate the approved workflow, human controls, failure handling and evidence trace—not production integration or model performance.
+
+## What this case demonstrates
+
+- Bounded problem selection, product strategy and explicit opportunity costs.
+- Healthcare workflow, ownership and human decision-right design.
+- Requirements, traceability, prioritisation and controlled change planning.
+- Proportionate architecture and legacy/API integration judgement.
+- Optional AI assistance with source linkage, human review and manual fallback.
+- Safety, testing, release and validation planning with clear evidence limits.
+
 ## Repository structure
 
 | Area | Contents |
 |---|---|
+| `00_Project_Charter/` | Accepted case boundary, objectives, constraints and evidence status. |
 | `01_Day_1_Product_Framing/` | Product case, workflow model, tracer patient and decision baseline. |
 | `Sprints/Sprint_2_Care_Journey_and_Operating_Model/` | Care journey, decision rights, source-of-record and failure paths. |
 | `Sprints/Sprint_3_Users_Decisions_and_MVP/` | Users, jobs, MVP scope, field mapping and integration assumptions. |
 | `Sprints/Sprint_4_Architecture_and_AI_Operating_Model/` | Logical architecture, simulated SMART/FHIR boundary, AI controls and audit model. |
 | `Sprints/Sprint_5_Clickable_Prototype/` | Requirements baseline, traceability, planned screen specifications and low-fidelity wireframes. |
+| `Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/` | Pre-created build, testing, AI-evaluation, safety and release-control artifacts; execution has not started. |
+| `Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/` | Pre-created reviewer, pilot, evidence and interview-packaging structures; validation has not started. |
 
 ## Current status
 
-Sprint 5 is complete. The approved requirements baseline, traceability controls and planned specifications for ten prototype screens are documented. The clickable prototype has **not** been built yet, and no live integration, deployed model, user research, clinical validation or outcome claim is made.
+Sprints 1–5 are complete. Sprint 5 is the approved requirements and solution baseline for ten prototype screens.
 
-Any future prototype work must use the approved Sprint 5 baseline and formal change control.
+Sprint 6 is next but has **not started**. Sprint 6–7 plans, control artifacts and evidence templates were created in advance; they are not implementation, test, reviewer or pilot evidence. No clickable prototype, live integration, deployed model, user research, clinical validation or outcome claim is made.
+
+Sprint 6 must build from the approved Sprint 5 baseline and use formal change control. See the [project status](STATUS.md) for the detailed evidence-readiness view.
 
 ## Key artifacts
 
 - [Portfolio case-study summary](portfolio_case_study_summary.md)
 - [Hospital-systems discovery context and problem coverage](hospital_systems_discovery_and_problem_coverage.md)
 - [Business requirements baseline](Sprints/Sprint_5_Clickable_Prototype/brd_lite.md)
+- [Prototype-readiness review and approved baseline](Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md)
 - [Screen specifications and low-fidelity wireframes](Sprints/Sprint_5_Clickable_Prototype/screen_specifications_and_wireframe_pack.md)
 - [Requirements traceability matrix](Sprints/Sprint_5_Clickable_Prototype/requirements_traceability_matrix.csv)
+- [Simplified architecture and prototype runtime](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/simplified_architecture.md)
 - [AI service cards and control matrix](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/ai_service_cards_and_control_matrix.md)
+- [Sprint 6 build and controlled-release plan](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/prototype_build_and_release_plan.md)
+- [AI evaluation rubric and release thresholds](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/ai_evaluation_rubric_and_release_thresholds.md)
+- [Product safety hazard-and-control register](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/product_safety_hazard_and_control_register.csv)
+- [Sprint 7 interview presentation outline](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/interview_presentation_outline.md)
 - [Project status](STATUS.md)
 
-## Portfolio reading path
+## Recommended interviewer reading path
 
-Start with these five headline items; the remaining controls are supporting evidence of delivery discipline.
+Start with these six headline areas; the remaining controls provide supporting delivery evidence.
 
-1. Product case and Indian integrated-care problem framing.
-2. Workflow and human-decision model.
-3. Product strategy, prioritisation and delivery roadmap.
-4. Architecture, interoperability and AI governance.
-5. Wider hospital-system context and explicit covered/represented/deferred boundaries.
-6. Wireframes, clickable prototype and validation evidence (when completed).
+1. [Product case, selection rationale and strategy](portfolio_case_study_summary.md).
+2. [Workflow, ownership and human decision model](Sprints/Sprint_2_Care_Journey_and_Operating_Model/care_episode_operating_model.md).
+3. [Approved requirements and prototype-readiness baseline](Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md).
+4. [Architecture, interoperability and AI operating boundary](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/architecture_principles_and_boundary.md).
+5. [Wider hospital-system context and explicit coverage boundaries](hospital_systems_discovery_and_problem_coverage.md).
+6. [Wireframes](Sprints/Sprint_5_Clickable_Prototype/screen_specifications_and_wireframe_pack.md), followed by clickable-prototype and validation evidence when Sprint 6–7 execution is completed.
 
 ## Scope note
 
