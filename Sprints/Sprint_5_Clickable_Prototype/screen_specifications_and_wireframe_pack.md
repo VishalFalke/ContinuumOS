@@ -291,10 +291,10 @@ The rail may use a small neutral line illustration of a clinician reviewing a re
 | RTM-primary requirements | BR-02; FR-08; FR-29; NFR-08; US-01. |
 | Supporting controls | FR-22; NFR-04; NFR-05; NFR-06; NFR-07. |
 | Acceptance criteria | AC-FR-08-01 to AC-FR-08-02; AC-FR-22-01 to AC-FR-22-02; AC-FR-29-01 to AC-FR-29-02; AC-NFR-04-01 to AC-NFR-04-03; AC-NFR-05-01 to AC-NFR-05-03; AC-NFR-06-01 to AC-NFR-06-03; AC-NFR-07-01 to AC-NFR-07-03; AC-NFR-08-01 to AC-NFR-08-03. |
-| Authorised actor | Clinic physician only. Care Coordinator may view resulting work but cannot choose a direction. |
-| Entry state | `Result Acknowledged`; `Follow-up Decision Required`. |
-| Primary action | Contextual: `Record clinic-management direction and confirm next step` when all T08 evidence is complete, or `Record referral/escalation direction` for T09. |
-| Success outcome | Complete clinic-management evidence records EVT-11/T08, creates `Next Step Confirmed` and opens `SCR-10` in closure mode. Day-care referral or hospital escalation records EVT-11/T09, creates `Referral Created` and opens `SCR-05`. |
+| Authorised actors | Clinic physician records the human follow-up direction. For clinic management only, the Care Coordinator verifies the non-clinical T08 evidence and records `Next Step Confirmed`; the Care Coordinator cannot choose or alter the direction. |
+| Entry state | `Follow-up Decision Required`. `Result Acknowledged` is the immediately preceding state and remains visible as linked history. |
+| Primary action | Role-aware: Clinic physician uses `Record follow-up direction`; for a clinic-management direction, Care Coordinator then uses `Verify T08 evidence and record Next Step Confirmed`. Referral/escalation direction uses T09. |
+| Success outcome | The Clinic physician's complete clinic-management direction remains attributable; after Care Coordinator verification of the required T08 evidence, `Next Step Confirmed` is recorded and `SCR-10` opens in closure mode. Day-care referral or hospital escalation records EVT-11/T09, creates `Referral Created` and opens `SCR-05`. |
 | Failure outcome | Missing acknowledgement, stale report version, missing authority or missing required evidence remains pending or opens `SCR-07`. |
 | Audit evidence | EVT-11 `care.direction.recorded`. |
 
@@ -313,12 +313,13 @@ The header must show the acknowledged report ID/current version, acknowledgement
 
 ### Permitted actions and validation
 
-- Only the Clinic physician may record one of the three approved directions.
-- The record action shows the selected direction, acknowledged report version, evidence reference, actor and timestamp before confirmation.
+- Only the Clinic physician may record one of the three approved directions. The Care Coordinator may verify T08 evidence only after the Clinic physician has selected clinic management; this verification never changes the selected direction.
+- The direction record shows the selected direction, acknowledged report version, evidence reference, actor and timestamp before confirmation. The separate T08 verification shows the named owner, timeframe, next task and applicable communication/confirmation evidence before `Next Step Confirmed` is recorded.
 - AI cannot choose, rank, recommend, approve or infer a direction or urgency.
-- Clinic management is not a default selection. T08 remains in `Follow-up Decision Required` until the physician direction plus named clinic owner, timeframe, next task and applicable communication/confirmation evidence are complete and the Care Coordinator has verified the non-clinical closure evidence.
+- Clinic management is not a default selection. T08 remains in `Follow-up Decision Required` until the Clinic physician has recorded the direction and the Care Coordinator has verified the named clinic owner, timeframe, next task and applicable communication/confirmation evidence.
 - Referral and hospital-escalation selections use T09 and do not require receiving-response evidence on this screen.
 - A high-risk confirmation records EVT-11 once. Repeated submission returns the original outcome rather than creating duplicate direction evidence.
+- The low-fidelity wireframe's `Record direction` control represents the Clinic physician's action. For clinic management, the implemented screen must also show the distinct Care Coordinator T08 verification control; it remains disabled until the required non-clinical evidence is complete.
 
 ### Asha journey rail
 

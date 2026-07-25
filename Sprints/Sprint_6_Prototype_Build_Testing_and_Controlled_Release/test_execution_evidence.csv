@@ -1,1 +1,1 @@
-Test ID,Requirement ID,Scenario,Test type,Preconditions,Expected behaviour,Observed behaviour,Result,Executed by,Execution date,Release,Evidence reference,Notes
+Test ID,Requirement ID,Screen ID,Scenario,Test type,Validation profile,Authorised participant role,Interaction state checked,Preconditions,Expected behaviour,Observed behaviour,Interaction or loading finding,Result,Defect reference,Executed by,Execution date,Release,Evidence reference,Notes

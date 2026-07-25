@@ -1,1 +1,1 @@
-Defect ID,Requirement ID,Scenario,Observed behaviour,Expected behaviour,Severity,Priority,Clinical or operational impact,Root-cause hypothesis,Workaround,Owner,Fix,Retest result,Release decision,Status
+Defect ID,Requirement ID,Screen ID,Scenario,Validation profile,Defect category,Interaction state,Observed behaviour,Expected behaviour,Severity,Priority,Clinical or operational impact,Root-cause hypothesis,Workaround,Owner,Fix,Retest result,Release decision,Status

@@ -129,3 +129,17 @@ All Sprint 4 required work is now complete as requirements-level documentation. 
 - S4-TRC-04 replaced stale references to already-created Sprint 4 event, AI and audit artifacts while retaining UAT/prototype work as future obligations.
 - Seven governing CSVs parsed with unique primary IDs; all 11 JSON fixture blocks parsed; EVT-01–EVT-22 IDs/names and required transition references resolved; both Sprint 4 Mermaid artifacts passed structural fence/declaration checks; stale wording, status labels and unsupported-claim searches passed.
 - No canonical state, capability, integration, decision right, source authority, evidence requirement or implementation claim was added. Sprint 4 remains complete as a requirements-level documentation package; UAT, prototype, open assumptions, pilot hypotheses, D12 policy review and production-readiness work remain outside this completion claim.
+
+### Prototype-runtime and future-integration clarification — 2026-07-26
+
+- `simplified_architecture.md` now includes a Sprint 6 runtime diagram showing the real clickable frontend, deterministic prototype controller, local/mock fixture access, synthetic source/workflow/failure JSON, pre-written AI outputs, session state and visible audit evidence.
+- `architecture_principles_and_boundary.md` now includes a future legacy/API integration reference pattern covering FHIR/SMART, HL7 v2 or approved source-specific adapters, access-policy gates, mapping/linkage/idempotency validation, exception reconciliation and audit.
+- Both diagrams preserve the existing boundary: the prototype has no live hospital API, production backend, source write-back or real AI call, while any future integration remains subject to discovery, safety analysis, conformance evidence and participant approval.
+- `portfolio_case_study_summary.md` now explains the diagnostic-closure selection through a qualitative rubric covering workflow exposure, consequence, ownership fragmentation, observability, human-control clarity, bounded demonstrability, addressability and dependency risk. No frequency, market, harm, adoption or outcome figure was introduced.
+
+### Fairness and future real-model assurance clarification — 2026-07-26
+
+- `ai_service_cards_and_control_matrix.md` now states that one synthetic tracer and pre-written outputs cannot establish subgroup fairness, representational adequacy, language equity or disparate impact.
+- The AI service-card package adds a future real-model gate covering supplier/model identity and version, licensing and rights, data retention/training use, subprocessors, model-change notice, adversarial security, representative-data evaluation, monitoring, rollback and accountable approval.
+- `illustrative_hie_deployment_readiness_checklist.md` carries the same supplier, rights and model-security checkpoint into future deployment assessment.
+- These are future-readiness controls only. No external model or AI API is selected or called, and no fairness, security, supplier, legal or production-readiness result is claimed.

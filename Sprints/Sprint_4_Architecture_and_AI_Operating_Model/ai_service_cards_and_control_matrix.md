@@ -16,6 +16,12 @@ AI may summarise and draft only. It must not diagnose, determine urgency, match 
 
 Missing-owner, overdue, duplicate, incomplete-result, missing-handoff and unavailable-service detection are deterministic workflow rules, not AI services.
 
+## Fairness and representation evidence boundary
+
+The MVP uses one synthetic tracer episode and pre-written outputs. It cannot evaluate subgroup fairness, representational adequacy, language equity or disparate impact, and it must not be presented as doing so. Fixture-level review may identify an obvious inconsistency in the approved scenario, but that is not a fairness result.
+
+Before a real model or broader pilot is considered, an accountable AI-governance owner must define the relevant populations, workflow contexts, languages, accessibility needs, error types and subgroup evaluation method using approved representative data. No demographic segment, fairness threshold or result is invented for this portfolio prototype.
+
 ## Service card A — Source-linked episode summary
 
 | Control | Requirement |
@@ -86,6 +92,20 @@ AI unavailable, timed out, stale, conflicting input, unsupported content or revi
   -> record EVT-20 disposition
   -> continue normal source-based human workflow
 ```
+
+## Future real-model and supplier gate
+
+The prototype uses no external model or AI API. Before replacing pre-written outputs with a real service, a separate decision must record:
+
+- supplier and model identity, version, intended use and material change-notification process;
+- contract, licensing, intellectual-property and permitted input/output-use terms;
+- whether submitted data or outputs are retained, reused for training or exposed to subprocessors;
+- hosting, residency, access, encryption, logging, incident-response and service-exit controls;
+- threat assessment and testing for prompt injection, adversarial input, data exfiltration and control bypass;
+- representative-data, subgroup, language and accessibility evaluation appropriate to the approved use;
+- monitoring, rollback, manual fallback and accountable approval for each material model or policy change.
+
+Procurement or technical availability does not approve the model for clinical or operational use. The existing human authority, source linkage, minimum-data, audit and non-blocking fallback requirements remain mandatory.
 
 ## Traceability and evidence status
 

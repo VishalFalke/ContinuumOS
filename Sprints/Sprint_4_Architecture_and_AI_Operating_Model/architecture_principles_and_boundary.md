@@ -45,6 +45,51 @@ If architecture wording conflicts with an inherited artifact, use this order:
 
 ## MVP architecture boundary
 
+## Integrated-care-network positioning
+
+This diagram is a conceptual reading aid for the portfolio case. It separates the care-network operating model, possible licensed data-integration capability, standards-based application access and the ContinuumOS workflow layer. It is not a deployment diagram, procurement plan or claim that any named operator or vendor is connected to ContinuumOS.
+
+```mermaid
+flowchart TB
+    A["Care journey across settings<br/>Clinic → Diagnostics → Specialist / Hospital → Home recovery"]
+    B["Authoritative systems and data sources<br/>EHR • LIS/RIS • scheduling • referral • device and monitoring systems"]
+    C["Data-integration layer<br/>Optional licensed enterprise capability, subject to discovery"]
+    D["Standards-based application access<br/>SMART on FHIR launch + authorised read-only FHIR access"]
+    E["ContinuumOS — in-house care-operations layer<br/>Episode visibility • tasks • ownership • exceptions • handoffs • audit"]
+    F["Optional AI assistance under human review<br/>Source-linked summary • post-approval handoff draft • manual fallback"]
+    G["Human-controlled workflow outcomes<br/>Acknowledgement • direction • referral response • confirmed next step"]
+
+    A --> B --> C --> D --> E --> G
+    E --> F
+    F -. "reviewed by authorised human" .-> E
+```
+
+### Layer boundaries
+
+| Layer | Role in the case | Boundary |
+|---|---|---|
+| Care-network operating model | Provides the clinic-to-home context in which continuity matters. | The MVP remains one synthetic diagnostic-closure episode; it does not implement a whole network. |
+| Data-integration layer | May connect device and operational data with enterprise information systems where an organisation licenses and validates a suitable capability. | No platform, procurement, interface or compatibility claim is made in this portfolio case. |
+| SMART on FHIR | Provides the chosen simulated clinician launch and authorised, read-only FHIR access pattern. | It is not a live EHR connection, production OAuth implementation or source write-back channel. |
+| ContinuumOS | Owns internal orchestration visibility, tasks, exceptions, evidence and audit history. | It is not the EHR, LIS/RIS, device platform or primary clinical record. |
+| AI assistance | Provides only the two approved source-linked drafts under human review. | It cannot make clinical, identity, referral, financial or closure decisions. |
+
+### Build, buy, partner and adopt boundary
+
+| Capability | Portfolio decision | Boundary |
+|---|---|---|
+| ContinuumOS workflow, task, exception and audit experience | Build as the differentiated workflow layer | Limited to the approved synthetic prototype and internal workflow evidence. |
+| Synthetic FHIR fixtures and simulated SMART launch | Build for the portfolio prototype | Demonstrates a bounded access pattern only; it is not a live integration. |
+| Production EHR, LIS/RIS, identity, consent and clinical-record integrations | Partner or procure later | External systems remain authoritative; discovery, procurement and local approvals are future work. |
+| Enterprise data-integration capability | Potential licensed partner capability | Vendor selection, compatibility and procurement are not decided or claimed. |
+| SMART on FHIR | Adopt as the interoperability pattern | The prototype simulates authorised read-only access; production conformance remains future readiness. |
+| Foundation AI model or API | Consume later through an approved service if separately authorised | The prototype does not train, select, call or evaluate a production model. |
+| AI summary and handoff draft controls | Build the workflow, review, traceability and evaluation layer | AI output remains optional, source-linked and subject to human review and manual fallback. |
+
+### openEHR research influence and selected boundary
+
+The user's earlier research was influenced by openEHR concepts, particularly durable structured clinical information and separation of clinical models from application logic. ContinuumOS does not implement those concepts as an openEHR Clinical Data Repository, archetype/template stack or conformance claim. The selected MVP problem is workflow continuity around authoritative source records, so simulated SMART on FHIR and limited FHIR R4-shaped reads are the proportionate application-access boundary. A longitudinal repository remains a separately governed future product and architecture decision, recorded as TDR-16.
+
 ### Included in the Sprint 4 MVP design
 
 - simulated clinician SMART launch with verified synthetic Patient and Encounter context;
@@ -68,6 +113,63 @@ If architecture wording conflicts with an inherited artifact, use this order:
 - source-write denial, workflow-service outage and recovery to the last verified state;
 - amended reports, duplicate events, incomplete results and reconciliation work;
 - future HL7 v2 ADT/ORU-like input patterns mapped to existing resources and canonical transitions.
+
+### Future legacy and API integration reference pattern
+
+This is a future-readiness pattern for discussing how a participating organisation might connect authoritative systems after discovery and approval. It does not select an interface, vendor, integration engine, transport, deployment topology or write-back scope.
+
+```mermaid
+flowchart LR
+    subgraph sources ["Authoritative participant systems"]
+        ehr["EHR / HIS"]
+        diagnostics["LIS / RIS / PACS"]
+        referral["Referral / receiving system"]
+        communication["Approved communication system"]
+    end
+
+    subgraph boundary ["Future approved integration boundary"]
+        fhir["SMART on FHIR or FHIR API<br/>where supported"]
+        hl7["HL7 v2 or source-event adapter<br/>where required"]
+        sourceApi["Approved source-specific API adapter"]
+        access["Identity, consent, purpose and access-policy gate"]
+        normalize["Mapping, terminology, version, linkage and idempotency validation"]
+    end
+
+    subgraph continuum ["ContinuumOS orchestration boundary"]
+        workflow["Workflow state, ownership, tasks and human gates"]
+        exception["Visible exception and accountable reconciliation"]
+        audit["Source references, processing outcome and audit evidence"]
+    end
+
+    ehr -. "future approved read/event path" .-> fhir
+    ehr -. "legacy pattern if approved" .-> hl7
+    diagnostics -. "future approved interface" .-> hl7
+    diagnostics -. "FHIR/API where available" .-> fhir
+    referral -. "future approved interface" .-> sourceApi
+    communication -. "future approved interface" .-> sourceApi
+    fhir --> access
+    hl7 --> access
+    sourceApi --> access
+    access --> normalize
+    normalize --> workflow
+    normalize --> exception
+    exception -->|"verified resolution and safe return"| workflow
+    workflow --> audit
+    exception --> audit
+```
+
+Before any real interface is designed, discovery must establish:
+
+- the authoritative source and owner for each status, decision and correction;
+- available standards, versions, profiles, message types, endpoints and vendor constraints;
+- identity, encounter, consent, purpose-of-use and workforce-access policy;
+- terminology mapping, report-version handling and minimum necessary fields;
+- batch, polling or event-delivery behavior, ordering, retry and idempotency expectations;
+- read, write and acknowledgement boundaries, including who may correct source data;
+- outage, reconciliation, monitoring, support and escalation ownership; and
+- retention, audit, security, data-residency and participant exit requirements.
+
+The reference pattern does not authorise source write-back. A future write path would require its own product decision, accountable source owner, API contract, safety analysis, conformance evidence and participant approval.
 
 ### Deferred or future architecture context
 

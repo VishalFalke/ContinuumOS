@@ -71,6 +71,49 @@ flowchart LR
     workflowService -.->|"Finance: displays dependency status"| finance
 ```
 
+## Sprint 6 prototype runtime architecture
+
+This implementation view clarifies how the coded clickable prototype may demonstrate the approved behaviour without a live hospital connection, production backend or real AI service. It is a build guide for Sprint 6, not evidence that the prototype has been implemented.
+
+```mermaid
+flowchart LR
+    user["Authorised demonstration role"]
+    external["EHR, LIS/RIS, referral and communication systems<br/>No live connection"]
+
+    subgraph prototype ["Sprint 6 coded prototype boundary"]
+        ui["Clickable frontend<br/>SCR-01 to SCR-10"]
+        controller["Prototype interaction and state controller<br/>Approved transitions, validation and role checks"]
+        fixtureAccess["Fixture access layer<br/>Local import or mock endpoint"]
+        sourceFixtures["Synthetic source JSON<br/>FHIR R4-shaped resources and source events"]
+        workflowFixtures["Workflow and failure JSON<br/>Initial states, exceptions and recovery scenarios"]
+        aiFixtures["Pre-written AI-output JSON<br/>Source links, versions, uncertainty and fallback cases"]
+        sessionState["Prototype session state<br/>Episode, task, owner, exception and review status"]
+        auditView["Derived prototype audit timeline<br/>Attributable actions, failures and corrections"]
+    end
+
+    user --> ui
+    ui --> controller
+    controller --> fixtureAccess
+    fixtureAccess --> sourceFixtures
+    fixtureAccess --> workflowFixtures
+    fixtureAccess --> aiFixtures
+    controller --> sessionState
+    sessionState --> auditView
+    auditView --> ui
+    external -. "represented only through synthetic fixtures" .-> sourceFixtures
+```
+
+| Prototype element | What is implemented | What is simulated or excluded |
+|---|---|---|
+| Frontend | Real clickable screens, navigation, role-visible actions, validation, loading/error feedback and failure recovery. | No claim of production usability, clinical validation or enterprise deployment. |
+| Interaction and state controller | Deterministic prototype logic for approved state changes, blocks, duplicate protection and safe return. | It is not a production workflow engine or source-system transaction processor. |
+| Fixture access layer | Reads project-controlled JSON through local imports or a mock endpoint chosen during implementation. | It is not a hospital API gateway, integration engine or live backend. |
+| Source and workflow fixtures | Synthetic FHIR R4-shaped resources, events, tasks, exceptions and scenario variants. | No real patient data, EHR/LIS/RIS connection, source write-back or interoperability conformance claim. |
+| AI fixtures | Pre-written source-linked summary and handoff-draft outputs, including stale, unsafe, unavailable and fallback examples. | No model call, training, inference, autonomous action or model-performance claim. |
+| Session and audit evidence | Prototype state and visible, attributable event history sufficient to demonstrate the approved scenarios. | No production database, immutable ledger, retention control or operational monitoring claim. |
+
+The essential behavior must remain understandable without the diagram: a real interactive frontend reads synthetic JSON, applies approved deterministic controls, displays pre-written AI drafts for human review and records visible prototype evidence. No external system or AI service is contacted.
+
 ## Layer responsibilities
 
 | Layer | MVP responsibility | Explicit boundary |

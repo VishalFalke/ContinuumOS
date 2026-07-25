@@ -32,6 +32,16 @@ Backlog order follows five controls:
 
 ## Required Sprint 6 prototype scenarios
 
+## Formal delivery slices
+
+The approved backlog is demonstrated in dependency order. These slices organise the prototype build; they do not alter the 53 approved requirements, screens or deferred scope.
+
+| Slice | Included screens and focus | Synthetic scenario / exit condition | Primary risk | Demonstration outcome | Does not prove |
+|---|---|---|---|---|---|
+| 1. Launch, episode and result integrity | SCR-01 to SCR-03; protected launch, verified linkage, current report and acknowledgement | PS-01 through acknowledgement; PS-02 or PS-03 safe return | Wrong patient, incomplete evidence or stale report version | A result is visibly distinct from a human acknowledgement | Live SMART/FHIR conformance, identity performance or clinical effectiveness |
+| 2. Human direction and referral handoff | SCR-04 to SCR-06; direction, package preparation/routing and receiving response | PS-01 through receiving response; PS-05 entry control | Decision authority or routing could be confused | Human direction, referral preparation and receiving response remain separate | Referral throughput, partner adoption or operational performance |
+| 3. Confirmation, audit, exceptions and controlled AI | SCR-07 to SCR-10; recovery, AI review/fallback, audit and scoped closure | PS-01 closure, PS-04 and PS-05 review/fallback | Unsafe automation or unexplained recovery | Users can continue without AI and inspect attributable workflow history | Model performance, clinical outcomes or production audit/security controls |
+
 ### PS-01 — Complete Asha referral journey
 
 **Purpose:** demonstrate the full diagnostic-to-next-step value chain.
