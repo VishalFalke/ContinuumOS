@@ -2,21 +2,18 @@
 
 ## Last updated
 
-2026-07-24
+2026-07-26
 
 ## Current position
 
-### Current status — supersedes the historical Sprint 3-start bullets below
+### Current status
 
-- Sprint 4 final traceability review against Sprints 1–3 is complete with no unresolved material gap.
-- Active sprint: Sprint 5 — Requirements Baseline and Solution Definition.
-- Overall status: Sprint 1–3 documentation and dependency alignment are complete; Sprint 3 scope, user/decision model, integration assumptions and MVP boundary are frozen for downstream work.
-- Current focus: complete the remaining Sprint 5 Part 2 operating controls after finishing one-to-one structured traceability for the 56-entry requirements register; prototype build has not started.
+- Sprints 1–5 are complete. Sprint 5 is the approved requirements and solution baseline for the synthetic clickable prototype.
+- Next sprint: Sprint 6 — Prototype Build, Testing and Controlled Release.
+- Current focus: pre-build preparation only; Sprint 6 implementation and execution have not started.
+- Sprint 7 remains planned and has not started.
 
-- Sprint 2 canonical dependency alignment cleanup is complete; Sprint 3 is ready to begin.
-- Active sprint: Sprint 3 — Users, Decisions and MVP
-- Overall status: Sprint 2 documentation and canonical dependency alignment complete; business-value framing added; project ready for Sprint 3
-- Current focus: Sprint 3 steps 1–2 complete; define jobs-to-be-done and acceptance conditions next
+Historical Sprint 3-start status is retained in the detailed work history below; it no longer describes the current project position.
 
 ## Sprint status
 
@@ -26,7 +23,7 @@
 | Sprint 2 | Care Journey and Operating Model | Complete |
 | Sprint 3 | Users, Decisions and MVP | Complete |
 | Sprint 4 | Architecture and AI Operating Model | Complete |
-| Sprint 5 | Requirements Baseline and Solution Definition | In progress — Part 1 complete |
+| Sprint 5 | Requirements Baseline and Solution Definition | Complete — approved Sprint 6 prototype baseline |
 | Sprint 6 | Prototype Build, Testing and Controlled Release | Not started |
 | Sprint 7 | External Validation, Synthetic Pilot and Portfolio Packaging | Not started |
 
@@ -38,13 +35,67 @@
 - Project-local prototype design standards are now documented in `design skills/`; they are guidance only and have not yet been applied to prototype code.
 - Sprint 1 product-case content, scope, workflow, state model, registers and Product Case Charter are documented.
 - No prototype code, user research, clinical validation, implementation evidence or outcome claims have been completed.
-- Sprint 5–7 plan structure was added on 2026-07-18. It is a controlled plan and template set only: no requirements have been approved, no prototype has been built, no tests or AI evaluations have been executed, and no reviewer or pilot evidence has been recorded.
+- Sprint 5–7 plan structure was added on 2026-07-18. Sprint 5 requirements were subsequently approved on 2026-07-25. Sprint 6–7 planning and template files remain advance preparation only: no prototype has been built, no tests or AI evaluations have been executed, and no reviewer or pilot evidence has been recorded.
+
+## Pre-created Sprint 6–7 artifact readiness
+
+The files below already exist so later sprint work can begin from controlled structures. “Pre-created” does not mean the sprint activity or its evidence is complete.
+
+| Sprint | Artifact group | Current readiness | What remains |
+|---|---|---|---|
+| Sprint 6 | Build plan, test strategy, defect/release policy, go/no-go criteria, AI evaluation rubric and safety hazard register | Pre-created with substantive planning or control content | Build the prototype, execute scenarios, record actual evidence and revise controls only when evidence supports a change |
+| Sprint 6 | Test, AI-evaluation, defect, UAT, reconciliation and change-log CSV files | Pre-created evidence templates | Populate only from actual Sprint 6 execution |
+| Sprint 6 | Release 0.1 and Release 0.2 notes | Pre-created release-note shells | Record the actual build scope, defects, corrections, retests and release decisions |
+| Sprint 7 | Reviewer plan, synthetic-pilot method, competitive-evidence plan, interview outline, talk track and portfolio-pack structure | Pre-created with planning or narrative scaffolding | Conduct reviews and the synthetic pilot, then replace planned wording with sourced evidence |
+| Sprint 7 | Review, pilot-result and change-evidence CSV files | Pre-created evidence templates | Populate only from documented Sprint 7 activity |
 
 ## Current blockers
 
 - None recorded.
 
 ## Latest completed work
+
+- On 2026-07-26, Sprint 6–7 readiness status was clarified. Existing planning, control, narrative and evidence-template files are now classified as pre-created rather than completed execution evidence. The AI control package also records that subgroup fairness is not evaluated by a single-tracer, fixed-output prototype, and future use of a real AI service requires separate supplier, data-use, rights, model-change and security assurance. Sprint 6 and Sprint 7 remain not started; no prototype, test, reviewer, pilot, fairness, security, vendor or production-readiness result is claimed.
+
+- On 2026-07-26, the safety-and-ethics portfolio framing was strengthened without claiming real-world safety. Sprint 6 now includes a seven-row `product_safety_hazard_and_control_register.csv` covering qualitative severity, potential harm scope, immediacy, reversibility, prevention, detection, recovery, ownership, planned test evidence, release response and residual uncertainty. The portfolio summary now states safety trade-offs and non-negotiables, and Sprint 7 interview materials require one evidence-separated safety decision segment. No probability, harm incidence, legal liability, guardrail cost, mitigation result, clinical validation or production-safety claim was added.
+
+- On 2026-07-26, the architecture and product-selection story was clarified without changing scope. `simplified_architecture.md` now shows the Sprint 6 coded frontend runtime backed by local/mock synthetic JSON, deterministic prototype state logic, pre-written AI outputs and visible audit evidence. `architecture_principles_and_boundary.md` adds a future-only legacy/API integration reference pattern with FHIR/SMART, HL7 v2 or approved source adapters, policy gates, mapping/linkage/idempotency validation and exception recovery. The portfolio summary adds a qualitative diagnostic-closure problem-selection rubric. No live API, production backend, real AI call, source write-back, vendor compatibility, frequency, market, harm or outcome claim was added.
+
+- On 2026-07-26, the interview-framework alignment review was implemented without adding unsupported claims. The Sprint 6 tracker now lists the exact ten approved screens, `SCR-01` through `SCR-10`; test and defect templates capture validation profile plus interaction/loading evidence; and a versioned AI evaluation rubric resolves OQ-04 for planning with critical-control and manual-fallback release gates. The portfolio summary now states product intent and alternatives considered, while Sprint 7 plans an evidence-separated interview narrative and an optional sourced competitive-approach appendix. No prototype, test, defect, usability finding, AI result, competitor capability, company alignment or outcome is claimed.
+
+- On 2026-07-26, an isolated screen-count error in the Sprint 6 build plan was corrected from seven screens to all ten approved screens, `SCR-01` through `SCR-10`. The correction aligns Sprint 6 with the Sprint 5 screen specification, navigation map and prototype-readiness baseline. No screen, requirement, state, role, workflow route or capability was added or removed, and prototype implementation remains not started.
+
+- On 2026-07-26, the portfolio summary and Sprint 6 planning were enhanced using relevant parts of the interview framework without inventing market size, company alignment, competitor research or demographic segmentation. `portfolio_case_study_summary.md` now defines usage-based operating profiles and explicit adopter, resource, market, competitive and decision-evidence limits. The Sprint 6 build/release plan and go/no-go criteria now require role-attributed validation and qualitative continue/change/defer-AI/stop signals tied to executed workflow, failure, UAT, defect and AI-control evidence. These are planning and presentation controls only; no requirement, state, screen, role authority, source boundary, AI capability, prototype result, staffing commitment or outcome changed.
+
+- On 2026-07-26, `portfolio_case_study_summary.md` added a compact `Product strategy and trade-offs` table. It makes the existing differentiation, workflow-pipeline, governance/readiness, opportunity-allocation and ecosystem decisions visible through their selected position, trade-off and supporting case evidence. It compares product approaches rather than making unsupported claims about named competitors and treats regulatory matters as future-readiness constraints rather than a compliance claim. No requirement, state, screen, role, source boundary, AI capability, prototype, test or outcome changed.
+
+- On 2026-07-25, the user-approved pre-Sprint 6 portfolio enhancement added `hospital_systems_discovery_and_problem_coverage.md`, covering the wider HIS/EHR, LIS/RIS, referral, billing/RCM, communication, BI, identity/consent and departmental-tracker context; a covered/represented/deferred/excluded problem matrix; and future discovery evidence boundaries. TDR-16 and the Sprint 4 architecture boundary now record openEHR as a user-provided research influence while retaining simulated SMART on FHIR and FHIR R4-shaped reads as the proportionate MVP access pattern. README and the portfolio summary link the package into the interviewer reading path. The approved requirements, states, screens, human authorities, source ownership, deferred scope and two-capability AI boundary are unchanged. No prototype, integration, test, stakeholder research, release, clinical validation or outcome claim was added.
+
+- On 2026-07-25, a portfolio-framing and product-strategy package was added at the user's request before Sprint 6 implementation. It narrows the first adoption context to one diagnostic-closure pathway within one provider network; records build/buy/partner/adopt boundaries; formalises three dependency-ordered prototype slices; adds a lean proposed delivery model and six planned prototype-learning hypotheses; and provides `portfolio_case_study_summary.md` as a concise interviewer reading path. The Sprint 5 approved requirements, states, roles, source authority, AI boundary and deferred scope are unchanged. No prototype, integration, test, reviewer evidence, release, clinical validation or outcome claim was added.
+
+- On 2026-07-25, portfolio framing was clarified without changing the approved Sprint 5 requirements baseline or starting Sprint 6. `README.md` and the Product Case Charter now state the larger Indian integrated-care continuity problem; the Sprint 4 architecture principles add a bounded conceptual layer diagram separating optional licensed data integration, SMART on FHIR access and the ContinuumOS in-house workflow layer; and Decision D11 now classifies external references precisely. The changes do not claim a relationship, procurement, deployment, integration, vendor capability equivalence, prototype or outcome.
+
+- On 2026-07-25, Sprint 5 Part 3 prototype-readiness review and approval baseline was completed in `Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md`. The Product Owner approved 53 controlled requirements for the synthetic Sprint 6 clickable prototype, retained FR-23, FR-26 and FR-28 as deferred roadmap scope, approved the qualitative prioritisation signals and resolved OQ-03 for the requirements baseline. OQ-03 synthetic-fixture validation remains a Sprint 6 obligation. This records a requirements decision only: no prototype, integration, test, reviewer evidence, clinical validation, release or outcome claim was added.
+
+- On 2026-07-25, Sprint 5 business-rule and validation catalogue Group 6 was completed in `Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md`, completing Part 2 operating controls. The reviewed rules define optional source-linked AI entry conditions, reviewer disposition/stale or unsupported output/manual fallback, and append-oriented audit correction/read-only analytics. AI and analytics remain review support only: neither can change a canonical state, appear as a human decision actor, create workflow action or replace an authorised human decision. Corrections append linked evidence rather than overwriting history. This is requirements documentation only; no source authority, state, human decision right, prototype, integration, test, user review or approval claim was added. Sprint 5 Part 3 readiness review is next.
+
+- On 2026-07-25, Sprint 5 business-rule and validation catalogue Group 5 was completed in `Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md`. The reviewed rules define deterministic exception detection/ownership/safe return, duplicate and out-of-order event protection, and failed-write/unavailable-service reconciliation. Detected conditions stay visible and owned; duplicate or replayed events cannot advance work twice; no failure is shown as success; and recovery returns only to the last verified valid state, never automatically to the intended next state. This is requirements documentation only; no source authority, state, human decision right, prototype, integration, test, user review or approval claim was added.
+
+- On 2026-07-25, Sprint 5 business-rule and validation catalogue Group 4 was completed in `Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md`. The reviewed rules define next-step confirmation, separate communication/delivery and explicit-confirmation evidence, and scoped diagnostic-closure workflow completion. The Care Coordinator verifies but cannot invent human-owned evidence; delivered communication is never promoted to confirmation; next-step confirmation and closure are separate human actions; and `Episode Completed` is not broader care completion. This is requirements documentation only; no source authority, state, human decision right, prototype, integration, test, user review or approval claim was added.
+
+- On 2026-07-25, Sprint 5 business-rule and validation catalogue Group 3 was completed in `Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md`. The reviewed rules define Clinic physician follow-up direction, Care Coordinator verification of clinic-management T08 evidence, Referral Coordinator package preparation/routing and receiving-team acceptance/rejection. The human authority chain is preserved: the Clinic physician selects the route, the Referral Coordinator prepares/routes an approved package and the receiving team alone decides response. A rejected referral returns to a new Clinic physician direction and never auto-routes. This is requirements documentation only; no source authority, state, human decision right, prototype, integration, test, user review or approval claim was added.
+
+- On 2026-07-25, Sprint 5 business-rule and validation catalogue Group 2 was completed in `Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md`. The reviewed rules define fixture-specific Result Available evidence and Result Incomplete recovery, current-version review-task assignment, Clinic physician acknowledgement and amended/corrected report re-review. Assignment remains distinct from acknowledgement; AI cannot substitute for source review; and a prior acknowledgement is historical evidence only, never a substitute for renewed review of the current report version. This is requirements documentation only; no source authority, state, human decision right, prototype, integration, test, user review or approval claim was added.
+
+- On 2026-07-25, Sprint 5 business-rule and validation catalogue Group 1 was completed in `Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md`. The reviewed rules define simulated launch/protected retrieval, verified linkage before episode attachment, and the strict separation of source order evidence from operational acceptance, scheduling and completion evidence. Pre-episode access failures remain represented conditions, not canonical workflow states; operational completion does not imply result availability. The rules map trigger, evidence, authority, validation, allowed outcome, blocked behaviour, safe return, audit and traceability. This is requirements documentation only; no source authority, state, human decision right, prototype, integration, test, user review or approval claim was added.
+
+- On 2026-07-25, the Sprint 5 cross-screen data dictionary and screen-field mapping was completed in `Sprints/Sprint_5_Clickable_Prototype/data_dictionary_and_screen_field_mapping.csv`, with a derived companion guide in `data_dictionary_visual_guide.md`. Together they cover all 27 approved Sprint 3 field groups (`FM-01` through `FM-26`, including separately controlled `FM-05A`) with source/owner, FHIR/internal field boundary, requiredness, edit authority, validation, missing-data behaviour, audit requirement, screen coverage and flow/event reference. The field-group identifiers exactly match the approved Sprint 3 field map; coverage spans `SCR-01` to `SCR-10`. `V` means view/read-only, `E` means authorised internal evidence entry, `B` means validation/action block and `A` means attributable evidence displayed in audit and trace. The guide's Mermaid flow and 27-by-10 matrix are explicitly derived from the CSV; the wireframe PDF and PNG archive were not used. This is a requirements-level control artifact only; no screen, integration, test, user review or approval claim was added. The remaining Sprint 5 Part 2 work is the detailed business-rule and validation catalogue.
+
+- On 2026-07-25, the Sprint 5 authoritative Markdown screen specification and navigation map were clarified after a consistency review. For SCR-04/T08, the Clinic physician records the clinic-management direction and the Care Coordinator separately verifies the required non-clinical evidence before `Next Step Confirmed` is recorded. SCR-04 now names `Follow-up Decision Required` as its entry state; SCR-01's pre-episode access failure is explicitly a represented condition rather than a workflow state. No scope, state model, source authority, AI boundary, prototype, test, user review or approval claim changed.
+
+- On 2026-07-24, the user accepted the refreshed Sprint 5 visual-reference pack in `Sprints/Sprint_5_Clickable_Prototype`: `Wireframe Images/Wireframes ContinuumOS.pdf` plus a numbered ten-image pack in `Wireframe Images/Wireframes ContinuumOS/`. The PDF has ten pages and the numbered images map in order: `1.png` = SCR-01 through `10.png` = SCR-10. The visual-alignment review is complete and accepted as reference material only. Known minor visual mismatches in SCR-01, SCR-02, SCR-03, SCR-05, SCR-07 and SCR-09 are explicitly deferred to the final prototype. Future work must use `screen_specifications_and_wireframe_pack.md` and `state_to_screen_navigation_map.csv` as the authoritative source; it must not use the PDF or PNG pack as a requirements, linking or behaviour reference. No prototype, integration, test, validation or approval claim is added.
+
+- A standalone, low-fidelity SVG visual for Sprint 5 `SCR-01` simulated SMART launch was created on 2026-07-24 directly from the approved screen specification. It depicts only simulated launch/access information before protected retrieval, retains the synthetic-prototype boundary and does not include the Asha journey rail. It is a static, editable documentation visual, not a clickable prototype, integration, test or approval claim.
 
 - Ten-screen Sprint 5 specification alignment correction completed on 2026-07-24. `screen_specifications_and_wireframe_pack.md` and `state_to_screen_navigation_map.csv` now use the canonical Asha synthetic fixture identifiers and distinguish RTM-primary requirements, supporting controls and atomic acceptance references. Role-specific actions, T08 clinic-management completion, T09 referral creation, T11 referral confirmation, T14 scoped closure, SCR-08 return routes, safe exception recovery and disabled incomplete-evidence actions are aligned across SCR-01 to SCR-10. This was an internal specification review only; no prototype, test, user review, integration, model capability or approval claim was added. The next work remains the cross-screen data dictionary and detailed business-rule/validation catalogue.
 

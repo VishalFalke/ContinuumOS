@@ -16,6 +16,10 @@ The product creates a shared view of one care episode: what has happened, what n
 
 Responsibility for moving a patient to the next safe step is fragmented across systems, teams and facilities. The core gap is not simply data exchange. It is the lack of a shared workflow state showing review status, next-action ownership, blockers, exceptions and safe readiness to proceed.
 
+**Portfolio framing:** Integrated Indian healthcare networks need more than connected data. When care moves between clinic, diagnostics, specialist, hospital and home-recovery settings, teams need accountable workflow continuity: a verified result, a human decision, a named owner, an accepted handoff where required and a confirmed next step. ContinuumOS is the in-house orchestration layer for that gap.
+
+This hypothetical case is relevant to emerging integrated care networks in Pune and other Indian metros. It does not claim a relationship, deployment or integration with any named healthcare operator or technology vendor.
+
 A diagnostic result may be available while the clinician has not acknowledged it, the coordinator cannot see who owns the next task, the referral team is waiting for documentation, administrative readiness is tracked separately and the patient has no confirmed next step.
 
 ## Product thesis and outcome
@@ -23,6 +27,10 @@ A diagnostic result may be available while the clinician has not acknowledged it
 ContinuumOS coordinates tasks, ownership, approvals, exceptions, patient communication and audit evidence across existing systems. In the MVP it may produce source-linked summaries and route approved workflow work; broader recommendation or anomaly-detection capabilities are deferred. Source systems retain authority over their clinical and administrative records.
 
 The primary outcome is the percentage of eligible care episodes progressing to the next human-confirmed safe care step within the defined clinical and operational SLA. This is a proposed North Star metric and has no baseline, target or achieved result in this case.
+
+## First-adopter boundary
+
+The integrated-care vision is deliberately narrowed for a credible first adoption: one diagnostic-closure pathway within one provider network, initially covering clinic, diagnostics and receiving-team coordination. Pune and India remain market context, not a claim of a client, deployment or network-wide operating model. Hospital-wide operations, discharge and home recovery are outside this MVP.
 
 ## Business value hypothesis
 
