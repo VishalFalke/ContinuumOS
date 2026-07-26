@@ -1,0 +1,3 @@
+export type AiReviewResult = { allowed: true; auditEvent: string; disposition: string; stateAfter: 'No canonical state change'; manualRoute: string } | { allowed: false; reason: string; manualRoute?: string }
+export const AI_DRAFTS: Record<string, { draftId: string; generatedAt: string; sourceLinks: string[]; uncertainty: string; text: string }>
+export function evaluateAiDraftReview(input: { capabilityId: string; reviewerRole: string; reportVersion: string; directionEvidence: string; draftStatus: string; sourceLinksComplete: boolean; disposition: string; correctionNote: string }): AiReviewResult
