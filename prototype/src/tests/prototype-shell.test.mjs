@@ -15,10 +15,12 @@ test('the shared shell uses native dialog semantics and has no domain-controller
   assert.doesNotMatch(shell, /from '\.\.\/domain\//)
 })
 
-test('the shell keeps direct routes explicit without repeating a per-role synthetic badge', async () => {
+test('the shell keeps direct-route context explicit outside the compact session header', async () => {
   const shell = await readFile(shellUrl, 'utf8')
   assert.match(shell, /directRouteNotice\(activeScreen, launchEstablished\)/)
-  assert.match(shell, /\{directRoute && <span>\{directRoute\}<\/span>\}/)
+  assert.match(shell, /className="direct-route-notice"/)
+  assert.match(shell, /<strong>Demonstration context<\/strong>/)
+  assert.doesNotMatch(shell, /\{directRoute && <span>\{directRoute\}<\/span>\}/)
   assert.match(shell, /roleMismatch/)
   assert.match(shell, /Access preview/)
   assert.doesNotMatch(shell, /className="preview-badge"/)
@@ -40,6 +42,19 @@ test('App changes the represented synthetic role and route together without a ha
   assert.match(app, /onReturn=\{requestNavigation\}/)
   assert.doesNotMatch(app, /setPendingHandoff/)
   assert.doesNotMatch(app, /<SimulatedRoleHandoffDialog/)
+})
+
+test('App places direct-route context in the workspace rather than the top bar', async () => {
+  const app = await readFile(appUrl, 'utf8')
+  const css = await readFile(cssUrl, 'utf8')
+  assert.match(app, /<DirectRouteNotice activeScreen=\{activeScreen\} launchEstablished=\{launchEstablished\} \/>/)
+  assert.match(css, /\.direct-route-notice \{[\s\S]*order: 4;/)
+})
+
+test('interviewer-facing screen eyebrows do not expose internal story or screen numbers', async () => {
+  const app = await readFile(appUrl, 'utf8')
+  assert.doesNotMatch(app, /<p className="eyebrow">SCR-/)
+  assert.doesNotMatch(app, /<p className="eyebrow">COS-/)
 })
 
 test('portfolio journey is visually separate, responsive and does not use a modal', async () => {

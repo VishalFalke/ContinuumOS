@@ -4,6 +4,7 @@ import test from 'node:test'
 import { evaluateAiDraftReview } from '../domain/ai-draft-controller.mjs'
 
 const appUrl = new URL('../app/App.tsx', import.meta.url)
+const controllerUrl = new URL('../domain/ai-draft-controller.mjs', import.meta.url)
 
 const ai01 = { capabilityId: 'AI-01', reviewerRole: 'Clinic physician', reportVersion: '2', directionEvidence: '', draftStatus: 'generated', sourceLinksComplete: true, disposition: 'accepted_for_orientation', correctionNote: '' }
 const ai02 = { capabilityId: 'AI-02', reviewerRole: 'Referral Coordinator', reportVersion: '2', directionEvidence: 'SYN-DIR-602-01', draftStatus: 'generated', sourceLinksComplete: true, disposition: 'accepted_for_use', correctionNote: '' }
@@ -20,15 +21,22 @@ test('SCR-08 presents calling workflow, source/version evidence, uncertainty and
   assert.match(app, /AI-generated draft · requires human review/)
 })
 
-test('SCR-08 keeps accepted, corrected, rejected and discarded dispositions equally available and unselected', async () => {
+test('SCR-08 exposes an editable draft and keeps accepted, corrected, rejected and discarded dispositions available', async () => {
   const app = await readFile(appUrl, 'utf8')
+  const controller = await readFile(controllerUrl, 'utf8')
   assert.match(app, /No option is preselected or preferred/)
   assert.match(app, /className="response-options ai-disposition-options"/)
   assert.match(app, /checked=\{disposition === acceptanceDisposition\}/)
   assert.match(app, /checked=\{disposition === 'corrected'\}/)
   assert.match(app, /checked=\{disposition === 'rejected'\}/)
   assert.match(app, /checked=\{disposition === 'discarded'\}/)
-  assert.match(app, /disposition === 'corrected' && <label className="evidence-input">Correction note/)
+  assert.match(app, /className="ai-draft-editor"/)
+  assert.match(app, /value=\{draftText\} onChange=\{\(event\) => editDraft\(event\.target\.value\)\}/)
+  assert.match(app, /Editing automatically marks the outcome as a human correction/)
+  assert.match(app, /disposition === 'corrected' && <label className="evidence-input">Correction rationale/)
+  assert.match(app, /setCorrectionNote\(''\)/)
+  assert.match(controller, /single approximately 8 mm echogenic focus/)
+  assert.match(controller, /cholelithiasis without sonographic evidence of acute cholecystitis/i)
   assert.doesNotMatch(app, /defaultChecked/)
 })
 

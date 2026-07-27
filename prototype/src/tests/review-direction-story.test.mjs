@@ -9,12 +9,22 @@ const appUrl = new URL('../app/App.tsx', import.meta.url)
 
 test('SCR-03 exposes the exact current source, assigned owner and human acknowledgement boundary before action', async () => {
   const app = await readFile(appUrl, 'utf8')
-  assert.match(app, /Read-only source report/)
-  assert.match(app, /\{report\.id\} · current v\{report\.version\}/)
-  assert.match(app, /<dt>Issued<\/dt><dd>\{report\.issuedAt\}<\/dd>/)
-  assert.match(app, /Assigned reviewer/)
+  assert.match(app, /<SyntheticReportDocument report=\{report\} \/>/)
+  assert.match(app, /Clinical result review/)
   assert.match(app, /Acknowledgement records that the assigned Clinic physician reviewed this exact source version/)
   assert.match(app, /It does not diagnose, approve a referral or select the follow-up direction/)
+})
+
+test('the approved synthetic report presents bounded findings, impression and a non-diagnostic image', async () => {
+  const shell = await readFile(new URL('../components/PrototypeShell.tsx', import.meta.url), 'utf8')
+  const fixture = JSON.parse(await readFile(new URL('../fixtures/synthetic-tracer.json', import.meta.url), 'utf8'))
+  const report = fixture.diagnosticReports.find((item) => item.version === '2')
+  assert.match(shell, /Synthetic abdominal-ultrasound report/)
+  assert.match(shell, /Source-linked evidence/)
+  assert.equal(report.imageRef, '/assets/synthetic-gallbladder-ultrasound.png')
+  assert.equal(report.findings.length, 2)
+  assert.match(report.impression, /Cholelithiasis/)
+  assert.match(shell, /not for diagnosis/)
 })
 
 test('SCR-03 success evidence appears only after the existing acknowledgement controller allows the action', async () => {

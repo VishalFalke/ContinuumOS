@@ -110,7 +110,7 @@ export const SCREEN_PRESENTATION: Record<ScreenId, PresentationContract> = {
       sentTo: 'Unchanged manual source-based workflow',
       nextStep: 'Review, correct, reject or discard optional assistance; continue manually when needed.',
     },
-    scenarioBoundary: 'AI cannot diagnose, acknowledge, choose direction, approve, route, accept, reject, confirm or close work. AI-01 returns to the source-based review workflow in Sprint 6B.',
+    scenarioBoundary: 'AI cannot diagnose, acknowledge, choose direction, approve, route, accept, reject, confirm or close work. Optional orientation assistance returns to the source-based review workflow.',
   },
   'SCR-09': {
     purpose: 'Inspect representative chronological evidence without editing history or changing workflow state.',
@@ -134,7 +134,7 @@ export const SCREEN_PRESENTATION: Record<ScreenId, PresentationContract> = {
       sentTo: 'End of the scoped diagnostic-closure demonstration after separate closure',
       nextStep: 'Record Next Step Confirmed only when the existing evidence gate passes, then consider the separate closure action.',
     },
-    scenarioBoundary: 'This Sprint 6B surface remains referral-only. It does not receive live response data from SCR-06 or represent all-care completion.',
+    scenarioBoundary: 'This demonstration remains referral-only. It does not receive live response data from the receiving-team response view or represent all-care completion.',
   },
 }
 

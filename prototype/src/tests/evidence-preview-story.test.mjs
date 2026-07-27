@@ -9,15 +9,18 @@ test('COS-6B-08 uses only the approved current synthetic DiagnosticReport fixtur
   assert.match(shell, /report\.status/)
   assert.match(shell, /report\.issuedAt/)
   assert.match(shell, /report\.basedOn/)
-  assert.match(shell, /report\.resultRefs\.join/)
-  assert.match(shell, /report\.subject.*report\.encounter/)
+  assert.match(shell, /report\.resultRefs\.includes/)
+  assert.match(shell, /report\.encounter/)
   assert.match(shell, /report\.priorVersion/)
 })
 
 test('COS-6B-08 provides a labelled read-only synthetic demonstration document', () => {
-  assert.match(shell, /Synthetic demonstration document.*read only/)
-  assert.match(shell, /approved source evidence/)
-  assert.match(shell, /Preview only\. No clinical findings, editing, download, source-system access, audit event or workflow action is available here/)
+  assert.match(shell, /Synthetic abdominal-ultrasound report.*read only/)
+  assert.match(shell, /className="report-image"/)
+  assert.match(shell, /AI-generated illustration.*not source-system imaging.*not for diagnosis/)
+  assert.match(shell, /className="report-findings"/)
+  assert.match(shell, /fictional report and AI-generated image are synthetic and non-diagnostic/)
+  assert.match(shell, /Preview only\. No editing, download, source-system access, audit event or workflow action is available here/)
   assert.doesNotMatch(shell, /Download synthetic report/)
 })
 

@@ -42,21 +42,41 @@ function ModalDialog({ children, labelledBy, onClose, open, returnFocusId }: { c
 type SyntheticReport = {
   basedOn: string
   encounter: string
+  findings?: string[]
   id: string
+  imageAlt?: string
+  imageRef?: string
+  impression?: string
   issuedAt: string
   priorVersion?: string
   resultRefs: string[]
   status: string
+  study?: string
   subject: string
   version: string
 }
 
 const CURRENT_SYNTHETIC_REPORT = fixture.diagnosticReports.find((item) => item.id === 'SYN-DR-6001' && item.version === '2')!
 
+export function SyntheticReportDocument({ report }: { report: SyntheticReport }) {
+  const supportingObservations = fixture.observations.filter((observation) => report.resultRefs.includes(`Observation/${observation.id}`))
+  return <article aria-label={`Synthetic diagnostic report ${report.id} version ${report.version}`} className="report-document">
+    <header className="report-document-header"><div><p className="panel-label">Synthetic abdominal-ultrasound report · read only</p><h3>Diagnostic report</h3><p>{report.id} · version {report.version}</p></div><span className="report-version-badge">{report.status} · current version</span></header>
+    <dl className="report-document-demographics"><div><dt>Patient</dt><dd>{fixture.patient.display}</dd></div><div><dt>Encounter</dt><dd>{report.encounter}</dd></div><div><dt>Issued</dt><dd>{report.issuedAt}</dd></div><div><dt>Source order</dt><dd>{report.basedOn}</dd></div></dl>
+    <section><h4>Study</h4><p>{report.study ?? 'Synthetic diagnostic-closure demonstration'}</p></section>
+    {report.imageRef && <figure className="report-image"><img alt={report.imageAlt ?? 'Synthetic diagnostic report illustration'} src={report.imageRef} /><figcaption><strong>Synthetic demonstration image</strong><span>AI-generated illustration · not source-system imaging · not for diagnosis</span></figcaption></figure>}
+    <section><h4>Source-linked evidence</h4>{supportingObservations.length ? <ul>{supportingObservations.map((observation) => <li key={observation.id}><strong>Observation/{observation.id}</strong><span>{observation.status} · {observation.basedOn}</span></li>)}</ul> : <p>No approved supporting observation is available.</p>}</section>
+    <section><h4>Findings</h4>{report.findings?.length ? <ul className="report-findings">{report.findings.map((finding) => <li key={finding}>{finding}</li>)}</ul> : <p>No narrative findings are represented in this synthetic report.</p>}</section>
+    <section><h4>Impression</h4><p>{report.impression ?? `No diagnostic impression is represented in synthetic report version ${report.version}.`}</p></section>
+    <aside className="report-synthetic-boundary"><strong>Demonstration boundary</strong><span>This fictional report and AI-generated image are synthetic and non-diagnostic. The Clinic physician remains responsible for reviewing approved source evidence and making the human acknowledgement or follow-up decision.</span></aside>
+    {report.priorVersion && <footer><strong>Amendment history</strong><span>Previous version {report.priorVersion} remains historical. This current version requires its own human review.</span></footer>}
+  </article>
+}
+
 export function SyntheticReportPreview({ report }: { report: SyntheticReport }) {
   const [open, setOpen] = useState(false)
   const titleId = useId()
-  return <><button aria-expanded={open} aria-haspopup="dialog" className="secondary-action synthetic-report-trigger" onClick={() => setOpen(true)} type="button">View report details</button><ModalDialog labelledBy={titleId} onClose={() => setOpen(false)} open={open}><section className="synthetic-report-preview"><header><p className="panel-label">Synthetic demonstration document · read only</p><h2 id={titleId}>Diagnostic report {report.id}</h2><p>Version {report.version} · approved source evidence</p></header><dl><div><dt>Status</dt><dd>{report.status} · current version</dd></div><div><dt>Issued</dt><dd>{report.issuedAt}</dd></div><div><dt>Source order</dt><dd>{report.basedOn}</dd></div><div><dt>Supporting evidence</dt><dd>{report.resultRefs.join(', ')}</dd></div><div><dt>Subject</dt><dd>{report.subject}</dd></div><div><dt>Encounter</dt><dd>{report.encounter}</dd></div>{report.priorVersion && <div><dt>Previous version</dt><dd>{report.priorVersion}</dd></div>}</dl><p className="synthetic-report-boundary">Preview only. No clinical findings, editing, download, source-system access, audit event or workflow action is available here.</p><button className="secondary-action" onClick={() => setOpen(false)} type="button">Close report</button></section></ModalDialog></>
+  return <><button aria-expanded={open} aria-haspopup="dialog" className="secondary-action synthetic-report-trigger" onClick={() => setOpen(true)} type="button">View report details</button><ModalDialog labelledBy={titleId} onClose={() => setOpen(false)} open={open}><section className="synthetic-report-preview"><h2 className="visually-hidden" id={titleId}>Diagnostic report {report.id}</h2><SyntheticReportDocument report={report} /><p className="synthetic-report-boundary">Preview only. No editing, download, source-system access, audit event or workflow action is available here.</p><button className="secondary-action" onClick={() => setOpen(false)} type="button">Close report</button></section></ModalDialog></>
 }
 
 export function SessionIdentity({ activeScreen, launchEstablished, session }: { activeScreen: ScreenId; launchEstablished: boolean; session: SimulatedSession | null }) {
@@ -75,8 +95,14 @@ export function SessionIdentity({ activeScreen, launchEstablished, session }: { 
   const roleTheme = representedSession.role.toLowerCase().replace(/[^a-z]+/g, '-')
   return <aside aria-live="polite" className="session-identity" data-role-theme={roleTheme}>
     <span aria-hidden="true" className="user-avatar">{initials}</span>
-    <span className="session-copy"><span className="session-label">{previewMode ? 'Viewing as' : 'Signed in as'}</span><strong>{primaryIdentity}</strong>{!repeatedRole && <span>{representedSession.role}</span>}{directRoute && <span>{directRoute}</span>}</span>
+    <span className="session-copy"><span className="session-label">{previewMode ? 'Viewing as' : 'Signed in as'}</span><strong>{primaryIdentity}</strong>{!repeatedRole && <span>{representedSession.role}</span>}</span>
   </aside>
+}
+
+export function DirectRouteNotice({ activeScreen, launchEstablished }: { activeScreen: ScreenId; launchEstablished: boolean }) {
+  const directRoute = directRouteNotice(activeScreen, launchEstablished)
+  if (!directRoute) return null
+  return <aside className="direct-route-notice" role="status"><strong>Demonstration context</strong><span>{directRoute}</span></aside>
 }
 
 function JourneyList({ activeScreen, onSelect }: { activeScreen: ScreenId; onSelect: (screenId: ScreenId) => void }) {
