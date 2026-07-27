@@ -38,6 +38,16 @@
 - Prefer workflow depth, failure handling and auditability over additional screens or technology names.
 - Do not add files or folders that are not required by the active sprint without confirmation.
 
+## Human approval gates and execution limits
+
+- Codex is the Builder. Product ownership, architecture, scope, clinical authority, AI safety, release and deployment decisions remain human-controlled.
+- Do not resolve conflicting source artifacts by assumption. Stop, identify the conflict and request a Product Owner decision.
+- The approved Sprint 5/6 controls are the source of truth. New project-local guidance may point to them but must not duplicate or silently alter requirements.
+- Do not delete, rename, move, overwrite, reset, revert or replace an existing file, folder, branch, data set, migration, test or configuration without explicit task authority and prior human approval. Identify target, purpose, impact/dependencies and recovery path first.
+- Production configuration, credentials, secrets, external connections, authentication, permissions, health/PII data, payment, encryption, exports, database changes, architecture changes, AI-safety changes, merges and deployments require explicit human approval.
+- Use dedicated branch/worktree isolation only when explicitly approved by the user and compatible with the existing workspace; parallel agents must not edit one working tree.
+- Automated loops are disabled unless the project has a documented readiness check and explicit human approval. A loop must have a maximum iteration count and stop after two materially unchanged failures.
+
 ## Prototype design standards
 
 - The authoritative project-local design guidance is in `design skills/README.md` and its six linked files.
@@ -48,6 +58,7 @@
 - Use `04_motion.md` only where motion clarifies continuity or feedback. Never let motion delay, obscure or imply clinical approval.
 - Use `05_react-performance.md` and `06_react-quality.md` for proportionate implementation review. Do not add production infrastructure or claim quality scores that were not verified.
 - Human-controlled clinical decisions and traceable failure handling take precedence over every visual or engineering preference.
+- Use the local `behavioral-ux-human-ai-design` skill whenever it is relevant to frontend/workflow work. It must preserve approved roles, authority, user intent, cognitive clarity, recovery and AI-human separation; it cannot create new scope or override the project controls.
 
 ## Writing voice
 

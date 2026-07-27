@@ -1,0 +1,4 @@
+export type DirectionResult = { allowed: true; stateAfter: 'Follow-up Decision Required' | 'Referral Created'; nextAction: string; auditEvent: string; requiresCoordinatorVerification: boolean } | { allowed: false; reason: string; safeReturn?: string }
+export function evaluateFollowUpDirection(input: { actorRole: string; currentState: string; reportVersion: string; selectedDirection: string; evidenceReference: string; directionId: string }): DirectionResult
+export type T08VerificationResult = { allowed: true; stateAfter: 'Next Step Confirmed'; auditEvent: string } | { allowed: false; reason: string }
+export function evaluateT08Verification(input: { actorRole: string; selectedDirection: string; owner: string; timeframe: string; nextTask: string; communicationEvidence: string; verificationId: string }): T08VerificationResult

@@ -1,0 +1,69 @@
+{
+  "fixtureVersion": "ENAB-602.1",
+  "classification": "synthetic-only",
+  "episode": {
+    "id": "SYN-EP-8001",
+    "patientRef": "Patient/SYN-PAT-1001",
+    "encounterRef": "Encounter/SYN-ENC-2001",
+    "orderRef": "ServiceRequest/SYN-SR-4001",
+    "lastVerifiedState": "Diagnostic Completed"
+  },
+  "reviewAssignment": {
+    "taskId": "SYN-TASK-7001",
+    "state": "Clinical Review Pending",
+    "reportId": "SYN-DR-6001",
+    "reportVersion": "2",
+    "assignedTo": "Practitioner/SYN-PRAC-3001",
+    "assignedRole": "Clinic physician",
+    "dueAt": "2026-07-18T15:15:00+05:30"
+  },
+  "patient": { "resourceType": "Patient", "id": "SYN-PAT-1001", "display": "Asha Mehta (synthetic)" },
+  "encounter": { "resourceType": "Encounter", "id": "SYN-ENC-2001", "subject": "Patient/SYN-PAT-1001" },
+  "serviceRequest": {
+    "resourceType": "ServiceRequest",
+    "id": "SYN-SR-4001",
+    "status": "active",
+    "intent": "order",
+    "subject": "Patient/SYN-PAT-1001",
+    "encounter": "Encounter/SYN-ENC-2001"
+  },
+  "observations": [
+    { "resourceType": "Observation", "id": "SYN-OBS-5001", "status": "final", "subject": "Patient/SYN-PAT-1001", "encounter": "Encounter/SYN-ENC-2001", "basedOn": "ServiceRequest/SYN-SR-4001" },
+    { "resourceType": "Observation", "id": "SYN-OBS-5002", "status": "final", "subject": "Patient/SYN-PAT-1001", "encounter": "Encounter/SYN-ENC-2001", "basedOn": "ServiceRequest/SYN-SR-4001" }
+  ],
+  "diagnosticReports": [
+    {
+      "resourceType": "DiagnosticReport",
+      "id": "SYN-DR-6001",
+      "version": "1",
+      "status": "final",
+      "subject": "Patient/SYN-PAT-1001",
+      "encounter": "Encounter/SYN-ENC-2001",
+      "basedOn": "ServiceRequest/SYN-SR-4001",
+      "resultRefs": ["Observation/SYN-OBS-5001"],
+      "issuedAt": "2026-07-18T11:15:00+05:30"
+    },
+    {
+      "resourceType": "DiagnosticReport",
+      "id": "SYN-DR-6001",
+      "version": "2",
+      "status": "amended",
+      "subject": "Patient/SYN-PAT-1001",
+      "encounter": "Encounter/SYN-ENC-2001",
+      "basedOn": "ServiceRequest/SYN-SR-4001",
+      "resultRefs": ["Observation/SYN-OBS-5002"],
+      "issuedAt": "2026-07-18T13:30:00+05:30",
+      "priorVersion": "1"
+    }
+  ],
+  "completionEvents": [
+    { "eventId": "SYN-EVT-6101", "eventType": "diagnostic.report.completed", "sourceSystem": "synthetic-ris", "serviceRequestRef": "ServiceRequest/SYN-SR-4001", "diagnosticReportRef": "DiagnosticReport/SYN-DR-6001", "reportVersion": "1", "completedAt": "2026-07-18T11:15:00+05:30" },
+    { "eventId": "SYN-EVT-6102", "eventType": "diagnostic.report.completed", "sourceSystem": "synthetic-ris", "serviceRequestRef": "ServiceRequest/SYN-SR-4001", "diagnosticReportRef": "DiagnosticReport/SYN-DR-6001", "reportVersion": "2", "completedAt": "2026-07-18T13:30:00+05:30" }
+  ],
+  "failureVariants": {
+    "missingEncounter": "Encounter Missing",
+    "missingReportEvidence": "Result Incomplete",
+    "duplicateEvent": "Duplicate Event Suspected",
+    "sourceUnavailable": "Integration Unavailable"
+  }
+}

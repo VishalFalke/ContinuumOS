@@ -30,4 +30,8 @@ The release record must reference `product_safety_hazard_and_control_register.cs
 
 ## Decision record
 
-Not yet recorded. A decision must be based on executed test evidence and the defect log.
+2026-07-27 Builder assessment: a No-Go / change-and-retest recommendation was recorded after QLT-604 triage. It reviewed `T-QLT-601-01` through `T-QLT-604-01`, `AI-EVAL-QLT-603-01` through `AI-EVAL-QLT-603-04`, the safety-hazard register and the defect log.
+
+2026-07-27 corrective evidence: the Product Owner reported passing physical-keyboard and assistive-technology checks (`T-QLT-604-02`), resolving `DEF-QLT-604-01`. The duplicate reconciliation row was formally retained as `SDR-ENAB-602-01-SUPERSEDED`, resolving `DEF-QLT-604-02` without changing the primary result or prototype behaviour.
+
+2026-07-27 Product Owner decision: **Conditional Go for structured synthetic review and synthetic workflow evaluation only.** No open Critical or High defect remains in this synthetic prototype evidence set. This decision does not approve production deployment, clinical use, live integration, accessibility certification, real-user research or external data processing.

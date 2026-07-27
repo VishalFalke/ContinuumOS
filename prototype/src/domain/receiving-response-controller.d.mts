@@ -1,0 +1,3 @@
+export type ReceivingResponseInput = { currentState: string; packageId: string; sendReference: string; decisionActorRole: string; decisionActor: string; recordingActorRole: string; recordingSource: string; response: string; destination: string; timeframe: string; rejectionReason: string; confirmationId: string; responseId: string; alreadyRecorded: boolean }
+export type ReceivingResponseResult = { allowed: true; stateAfter: 'Referral Accepted' | 'Referral Rejected'; auditEvent: string; nextAction: string } | { allowed: false; reason: string }
+export function evaluateReceivingResponse(input: ReceivingResponseInput): ReceivingResponseResult
