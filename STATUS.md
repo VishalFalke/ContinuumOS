@@ -2,7 +2,7 @@
 
 ## Last updated
 
-2026-07-26
+2026-07-27
 
 ## Current position
 
@@ -10,8 +10,8 @@
 
 - Sprints 1–5 are complete. Sprint 5 is the approved requirements and solution baseline for the synthetic clickable prototype.
 - Next sprint: Sprint 6 — Prototype Build, Testing and Controlled Release.
-- Current focus: Sprint 6 Increment 6.4 is in progress. ENAB-601/602/603 and COS-601 through COS-610 have local evidence; next work is the approved Sprint 6 quality/test scope.
-- Sprint 7 remains planned and has not started.
+- Current focus: Sprint 6 is complete as a local synthetic prototype build-and-controlled-review package. Release 0.2 resolved its two evidence defects, and the Product Owner recorded a Conditional Go for structured synthetic review and synthetic workflow evaluation only. No deployment, clinical validation or production approval is implied.
+- Next sprint: Sprint 7 — External Validation, Synthetic Pilot and Portfolio Packaging. It has not started.
 
 Historical Sprint 3-start status is retained in the detailed work history below; it no longer describes the current project position.
 
@@ -27,7 +27,13 @@ Historical Sprint 3-start status is retained in the detailed work history below;
 | Sprint 6 | Prototype Build, Testing and Controlled Release | In progress — all approved SCR-01 through SCR-10 story foundations have local build evidence; quality/test scope remains |
 | Sprint 7 | External Validation, Synthetic Pilot and Portfolio Packaging | Not started |
 
-Sprint 6 factual update (2026-07-26): COS-610 is now implemented and evidenced; the next work is the approved Sprint 6 quality/test scope. The earlier table wording is retained as historical context and is superseded by the current-focus and latest-work entries below.
+Sprint 6 factual update (2026-07-27): Sprint 6 is complete as a local synthetic prototype build-and-controlled-review package. The Release 0.2 evidence correction resolved the two QLT-604 evidence defects, and the Product Owner recorded a Conditional Go for structured synthetic review only. The earlier table wording is retained as historical context and is superseded by the current-focus and latest-work entries below.
+
+- On 2026-07-27, QLT-601 completed its local quality scope. All 31 Node tests passed for the approved synthetic workflow controls, and the fixture-level simulated-integration checks passed for verified linkage, duplicate-event non-advancement, missing-encounter quarantine and amended-report re-review. TypeScript lint and the local Vite production build passed. The authorised-role browser walkthrough subsequently passed with a persistent local Vite server: it covered protected access, unavailable-access recovery, clinician acknowledgement/direction, referral routing, receiving-team acceptance, evidence-gated confirmation/closure and accountable exception recovery. The evidence shows no observed authority bypass or product defect. This is synthetic role-walkthrough evidence only—not Product Owner sign-off, real-user research, clinical validation, release approval, deployment or production readiness. Next: perform QLT-602 accessibility and interaction-state checks.
+
+- On 2026-07-27, QLT-602 recorded a pass with a stated verification limitation. Browser and static review confirmed labelled native controls, visible focus styling, semantic navigation, live status feedback, text-plus-symbol workflow state, reduced-motion transition removal, and readable initial/loading/unavailable/blocked/success/recovery feedback. The local browser harness focused the skip link but did not activate it with its synthetic Enter event; pointer activation correctly moved focus to the main workspace. This is not a product defect or accessibility certification: physical-keyboard activation and an assistive-technology audit remain outstanding before a release decision. Next: QLT-603 fixture-level AI control evaluation.
+
+- On 2026-07-27, QLT-603 completed a fixture-level AI control evaluation for the two approved pre-written synthetic drafts. AI-01 and AI-02 displayed source/version references, uncertainty, authorised human disposition and an explicit no-state-change boundary. Current fixtures recorded the applicable authorised acceptance disposition; stale AI-01 and represented-unavailable AI-02 blocked attempted acceptance, required rejection/discard and returned to the normal SCR-03/SCR-05 manual workflows. Direct deterministic checks also blocked missing source links and wrong report version, while correction required a note. All 31 Node tests, TypeScript lint and the local Vite production build passed. This is deterministic fixture evidence onlyâ€”not deployed-model quality, unsupported-content prevalence, fairness, clinical validation, release approval, deployment or production readiness. Next: QLT-604 defect triage and Release 0.1 to 0.2 decision.
 
 - On 2026-07-26, COS-610 added SCR-10 next-step confirmation and scoped closure for the synthetic accepted day-care-referral path. The Care Coordinator must record named owner, destination/team, timeframe, approved communication, authorised sender, channel, delivery evidence and explicit patient/caregiver confirmation separately before EVT-16 can record `Next Step Confirmed`. EVT-22 is a second Care Coordinator action available only afterward, and `Episode Completed` is explicitly labelled diagnostic-closure workflow completion rather than all-care completion. The deterministic checks reject missing evidence, wrong state, safety-blocking exceptions and duplicate confirmation/closure. Thirty-one Node tests, TypeScript lint and the local Vite production build passed. No automatic confirmation or closure, clinical decision, real communication, source write-back, live integration, AI authority, deployment or release was implemented.
 
@@ -216,6 +222,10 @@ The files below already exist so later sprint work can begin from controlled str
 - Confirm the final presentation scorecard.
 - Confirm whether the existing Day 1 placeholder files remain the working location or should be consolidated under Sprint 1.
 - Sprint 3 must carry forward unresolved assumptions A01/A02/A03/A08/A09/A10/A11, pilot hypotheses A05/A07/A12 and represent-only outage/write-failure behaviour.
+
+- On 2026-07-27, QLT-604 completed the available defect triage and controlled release-readiness assessment. No observed Critical product-control defect was logged; the safety register now links the executed synthetic prevention, detection and recovery evidence for all Critical and High hazards. `DEF-QLT-604-01` is an open High/P1 physical-keyboard and assistive-technology verification gap, and `DEF-QLT-604-02` is an open Low/P3 duplicate reconciliation-evidence record. The Builder recommendation is No-Go / change and retest, so no Release 0.2 correction, Product Owner decision, external-review entry, deployment or production release is claimed. Next: execute the missing accessibility verification, resolve or formally supersede the duplicate evidence row with approval, then obtain the Product Owner controlled synthetic-review decision.
+
+- On 2026-07-27, the Product Owner reported successful physical-keyboard and assistive-technology checks, resolving `DEF-QLT-604-01`. The duplicate synthetic reconciliation row was formally retained as `SDR-ENAB-602-01-SUPERSEDED`, resolving `DEF-QLT-604-02` without changing the active evidence result or prototype behaviour. The Product Owner recorded a Conditional Go for structured synthetic review and synthetic workflow evaluation only. Sprint 6 is complete as a local synthetic prototype package; no production deployment, clinical validation, live integration, real-user research or accessibility certification is claimed.
 
 ## Update rule
 
