@@ -14,8 +14,8 @@ test('COS-6B-08 uses only the approved current synthetic DiagnosticReport fixtur
   assert.match(shell, /report\.priorVersion/)
 })
 
-test('COS-6B-08 provides a labelled read-only demonstration document', () => {
-  assert.match(shell, /Demonstration document.*read only/)
+test('COS-6B-08 provides a labelled read-only synthetic demonstration document', () => {
+  assert.match(shell, /Synthetic demonstration document.*read only/)
   assert.match(shell, /approved source evidence/)
   assert.match(shell, /Preview only\. No clinical findings, editing, download, source-system access, audit event or workflow action is available here/)
   assert.doesNotMatch(shell, /Download synthetic report/)

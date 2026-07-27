@@ -18,6 +18,7 @@ test('the shared shell uses native dialog semantics and has no domain-controller
 test('the shell keeps direct routes explicit without repeating a per-role synthetic badge', async () => {
   const shell = await readFile(shellUrl, 'utf8')
   assert.match(shell, /directRouteNotice\(activeScreen, launchEstablished\)/)
+  assert.match(shell, /\{directRoute && <span>\{directRoute\}<\/span>\}/)
   assert.match(shell, /roleMismatch/)
   assert.match(shell, /Access preview/)
   assert.doesNotMatch(shell, /className="preview-badge"/)

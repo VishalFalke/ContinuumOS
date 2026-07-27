@@ -2,14 +2,14 @@
 
 ## Current story
 
-**Current 2026-07-27:** `COS-6B-08` is done. Next: `QLT-6B-02` final whole-prototype regression.
+**Current 2026-07-27:** Sprint 6B is complete. `QLT-6B-01` and `QLT-6B-02` are closed; the Product Owner reported physical-keyboard and actual-browser-zoom checks passed.
 
 `COS-6B-07 — Done; COS-6B-08 — Pending evidence-preview mapping and interaction readiness`
 
 ## Current delivery boundary
 
 - Active sprint: Sprint 6B only.
-- Current work: COS-6B-08 approved evidence preview is complete. The current SYN-DR-6001 v2 fixture is available as a read-only, labelled synthetic document on the approved mapped screens; final whole-prototype regression is next.
+- Current work: Sprint 6B closure evidence is complete. QLT-6B-02 passed automated clean-session route, recovery, dialog and responsive checks; the Product Owner reported the outstanding physical-keyboard and actual-browser-zoom checks passed.
 - Prototype implementation status: the approved simulated session, explicit role handoff, hybrid viewer-navigation shell and bounded SCR-01 through SCR-10 comprehension treatments are in place; existing workflow behaviour remains unchanged.
 - Product Owner decisions recorded: `DEP-6B-01` to `DEP-6B-04`, session handoff model, hybrid navigation, evidence-preview treatment and validation viewports.
 
@@ -46,6 +46,6 @@
 
 ## Next recommended story
 
-`QLT-6B-02 — Final whole-prototype regression`.
+Sprint 6B is complete. The next sprint is Sprint 7, which remains outside this task's scope.
 
 `COS-6B-08 — Preview approved synthetic evidence read-only`, pending evidence-preview mapping and interaction readiness.

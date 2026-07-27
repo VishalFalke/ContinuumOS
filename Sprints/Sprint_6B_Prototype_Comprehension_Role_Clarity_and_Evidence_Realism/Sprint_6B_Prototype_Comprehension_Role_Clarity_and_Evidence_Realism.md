@@ -2,7 +2,9 @@
 
 ## Status
 
-Implementation in progress. The approved planning and shared-shell enablers plus `COS-6B-01` through `COS-6B-08` are complete. Final whole-prototype regression remains.
+Closure evidence update (2026-07-27): the Product Owner reported that the outstanding physical-keyboard and actual-browser 200% zoom checks were completed successfully. This is reported external verification, not an automation result. It closes `QLT-6B-02`; no workflow, controller, fixture, route, authority, dependency, integration or AI-safety control changed.
+
+Complete. The approved planning and shared-shell enablers plus `COS-6B-01` through `COS-6B-08`, `QLT-6B-01` and `QLT-6B-02` are complete. Automated clean-session evidence passed, and the Product Owner reported successful physical-keyboard and actual-browser-zoom verification.
 
 Sprint 6B is a bounded prototype-refinement sprint positioned after the completed Sprint 6 baseline and before Sprint 7. It does not reopen the approved workflow, state model, human-control rules or AI boundaries.
 
