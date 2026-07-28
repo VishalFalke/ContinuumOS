@@ -2,16 +2,19 @@
 
 ## Purpose
 
-Sprint 7 will use this scorecard to present evidence status, not to manufacture completion. It is a final portfolio view of the Lead BA control stack.
+This scorecard presents the Lead BA control stack using recorded evidence. It is not a completion percentage or a claim of production readiness.
 
-| Control area | Primary artifact | Current recorded evidence | Sprint 7 remaining work |
+| Control area | Primary artifact | Recorded evidence | Remaining boundary or next evidence |
 |---|---|---|---|
-| Requirements and traceability | Requirements register and RTM | Sprint 5 baseline; Sprint 6 tests align to approved stories | Report approved/deferred and tested status separately |
-| Stakeholders and governance | Engagement plan, RACI and governance plan | Decision rights represented; no external reviewer participation recorded | Record only documented reviewer participation |
-| Risks, assumptions, issues and dependencies | RAID and open-question log | Sprint 6 hazard register and defect/release evidence | Link any reviewer-raised risk to a decision |
-| Priority and roadmap | MoSCoW impact-effort matrix and roadmap | No pilot-driven reprioritisation | Change only when recorded evidence changes a decision |
-| Data and process controls | Four-diagram pack and reconciliation tracker | One synthetic tracer and controlled scenario runs | Distinguish fixture checks from live integration evidence |
-| UAT and release | UAT tracker, test evidence, defects and release notes | 79 tests, lint/build, Release 0.2 Conditional Go | Do not overstate as production approval |
-| AI governance | AI decision record, evaluations and audit trace | Fixture-level source, disposition and fallback controls passed | Do not claim model quality, fairness or clinical safety |
+| Requirements and traceability | Sprint 5 requirements register and RTM | Approved baseline linked to Sprint 6 stories and tests | Keep approved, deferred and tested status separate |
+| Stakeholders and governance | Engagement plan, RACI, governance plan and `change_evidence_table.csv` | Decision rights are represented; six internal Product Owner findings drove documented, retested presentation decisions | No external reviewer participation or user research recorded |
+| Risks, assumptions, issues and dependencies | Sprint 6 hazard register, defect and release evidence | Critical linkage hazard has prevention, detection, recovery, accepted cost and synthetic evidence | Real-world risk frequency, harm and control effectiveness remain unknown |
+| Priority and roadmap | MoSCoW impact-effort matrix, roadmap and change-evidence table | Bounded credibility, context, evidence-access and confirmation-summary changes were approved without changing product scope | No evidence-backed external reprioritisation recorded |
+| Data and process controls | Four-diagram pack, reconciliation tracker and pilot method | One approved synthetic tracer; 20 controlled scenario runs; explicit source, owner and exception evidence | No live integration, production data or operational KPI evidence |
+| UAT and release | UAT tracker, 85 Node tests, lint, browser evidence and release notes | Local synthetic prototype controls and presentation changes passed recorded checks; Release 0.2 Conditional Go is limited to structured synthetic review | Managed-workspace standard build remains blocked; no deployment approval |
+| AI governance | AI decision record, evaluations and audit trace | Source, version, human disposition, correction rationale and manual fallback controls are tested | No model-quality, fairness, clinical-safety or supplier-assurance claim |
+| Competitive framing | `competitive_approach_evidence_plan.md` | Four adjacent approaches sourced from official public material, non-ranked and separate from product evidence | No market ranking, procurement recommendation or outcome comparison |
 
-No score, completion percentage or outcome is to be shown without recorded source evidence.
+## Evidence statement
+
+The six Product Owner findings are internal review evidence, not external reviewer research. They show that findings were recorded, a bounded decision was made and an implementation retest occurred; they do not establish usability, adoption or clinical validity.

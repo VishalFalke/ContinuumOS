@@ -12,8 +12,8 @@ Validate the workflow with relevant reviewers, measure prototype performance usi
 4. Pilot results — `pilot_result_summary.csv`
 5. Product revision and change-evidence table — `change_evidence_table.csv`
 6. Final portfolio evidence pack — `final_portfolio_evidence_pack.md`
-7. Interview presentation — `interview_presentation_outline.md`
-8. Demo narrative and interview talk track — `demo_narrative_and_interview_talk_track.md`
+7. Final interview presentation — `ContinuumOS.pptx`
+8. Final portfolio delivery narrative — represented in the retained final presentation
 9. Competitive-approach evidence plan and optional sourced appendix — `competitive_approach_evidence_plan.md`
 
 ## Artifact readiness at Sprint 7 entry
@@ -24,7 +24,7 @@ These files were created in advance as controlled plans, templates or narrative 
 |---|---|---|
 | `reviewer_plan_and_discussion_guide.md`, `synthetic_pilot_dataset_and_method.md` and `competitive_approach_evidence_plan.md` | Pre-created planning artifacts | Confirm the method and record any approved change before execution |
 | `review_notes_and_feedback_register.csv`, `pilot_result_summary.csv` and `change_evidence_table.csv` | Pre-created evidence templates; no observations or results recorded | Populate only from documented reviews, measurements and decisions |
-| `final_portfolio_evidence_pack.md`, `portfolio_ba_control_scorecard.md`, `interview_presentation_outline.md` and `demo_narrative_and_interview_talk_track.md` | Pre-created structures with partial planned narrative | Replace planned statements with cited Sprint 6–7 evidence and retain unresolved limitations |
+| `final_portfolio_evidence_pack.md`, `portfolio_ba_control_scorecard.md` and `ContinuumOS.pptx` | Final portfolio artifacts | Retain cited Sprint 6–7 evidence and unresolved limitations |
 
 ## Planned roadmap and governance evidence update
 
@@ -66,8 +66,14 @@ The final evidence pack will distinguish project-governance evidence from clinic
 ## Status
 
 - [ ] Not started
-- [x] In progress
-- [ ] Complete
+- [ ] In progress
+- [x] Complete
+
+- Sprint closure update (2026-07-28): Sprint 7 is complete as a local synthetic-pilot and portfolio-packaging package. The retained final presentation is `ContinuumOS.pptx`; the created alternative deck and its presentation-outline and demo-narrative Markdown files were explicitly removed. Six documented Product Owner findings remain labelled as internal review evidence, not external reviewer research. The planned external structured-review work was explicitly waived for this portfolio case, and the empty reviewer register accurately records that no external sessions occurred. The package retains local synthetic-pilot limits, open real-world evidence and the managed-workspace build limitation. No prototype code, workflow, authority, dependency, integration or AI-safety control changed.
+
+- Build-environment retention update (2026-07-28): `prototype/package.json` now invokes Vite's supported `--configLoader runner`, avoiding the default bundled-config write to `node_modules/.vite-temp`. The standard build still cannot complete inside the managed workspace because native filesystem operations are denied while Vite clears, copies to or creates generated content under the existing `prototype/dist` directory. TypeScript lint and all 85 Node tests passed; the same runner build succeeded when directed to a fresh temporary output directory. This is retained as a managed-environment/output-directory limitation, not a prototype or runtime defect. No dependency, prototype source code, workflow, authority or AI-safety control changed. Next environment check: run `npm.cmd run build` from a normally writable local checkout or after the generated `dist` output can be safely cleaned.
+
+- Competitive-approach appendix update (2026-07-28): the optional comparison is complete in `competitive_approach_evidence_plan.md`. It compares four adjacent named approaches using dated or explicitly undated official public sources retrieved on 2026-07-28. The compact table is non-ranked and separates documented product boundaries from `Not evidenced in reviewed sources`; it neither claims competitor weakness nor changes ContinuumOS scope, architecture, workflow, AI controls or prototype implementation.
 
 - Sprint 7 product-revision update (2026-07-28): Product Owner feedback identified generic role labels, technical source wording and invisible cross-system handoffs as a prototype-credibility problem. The approved bounded presentation update now uses one fictional demonstration network across all ten screens: Meadowbrook Community Clinic, Meridian Diagnostics Centre, Willow Day-care Unit and Central Hospital; named synthetic staff; five generated fictional portraits; and screen-specific simulated exchanges for the clinic EHR, legacy RIS, illustrative Philips Enterprise Imaging / PACS source, referral portal and scheduling/communications evidence. SCR-02 and SCR-03 now explain in plain language what happened, who owns the next action, where each person works and where the report/image evidence came from. All system surfaces state simulated, illustrative or no live connection. The report and image identifiers remain source-linked, and human clinical/referral/acceptance/confirmation/closure decisions plus AI review controls are unchanged. TypeScript lint, 82 Node tests and a temporary-output production bundle passed. Browser verification covered all ten routes at 1352×912 and 390×844 with no broken images, horizontal overflow or console errors; the secure launch through SCR-02 and SCR-03 also passed. This is internal Product Owner-directed revision evidence, not external reviewer research, a live integration, vendor partnership, clinical validation or production-readiness claim. The decision and retest are recorded in `change_evidence_table.csv` and `prototype/docs/synthetic-care-network-presentation-note.md`.
 
