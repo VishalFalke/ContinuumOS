@@ -21,3 +21,10 @@ test('the route contract provides readable hash routes while retaining internal 
   }
   assert.match(routeContract, /item\.route === value \|\| item\.id === value/)
 })
+
+test('screen changes reset the viewport and focus the workspace without moving it', async () => {
+  const app = await readFile(new URL('../app/App.tsx', import.meta.url), 'utf8')
+
+  assert.match(app, /window\.scrollTo\(\{ top: 0, left: 0, behavior: 'auto' \}\)/)
+  assert.match(app, /document\.getElementById\('prototype-content'\)\?\.focus\(\{ preventScroll: true \}\)/)
+})

@@ -1,7 +1,7 @@
 export const SAFE_RETURN_SCREEN_ID = 'SCR-07' as const
 
 export const APPROVED_SCREENS = [
-  { id: 'SCR-01', route: 'start', label: 'Start securely', story: 'COS-601', increment: '6.1', group: 'Care workflow', detail: 'Check simulated access' },
+  { id: 'SCR-01', route: 'start', label: 'Start securely', story: 'COS-601', increment: '6.1', group: 'Care workflow', detail: 'Check workspace access' },
   { id: 'SCR-02', route: 'episode-overview', label: 'Episode overview', story: 'COS-602', increment: '6.1', group: 'Care workflow', detail: 'Review current evidence' },
   { id: 'SCR-03', route: 'review-result', label: 'Review result', story: 'COS-603', increment: '6.2', group: 'Care workflow', detail: 'Acknowledge the current report' },
   { id: 'SCR-04', route: 'choose-follow-up', label: 'Choose follow-up', story: 'COS-604', increment: '6.2', group: 'Care workflow', detail: 'Record a human direction' },

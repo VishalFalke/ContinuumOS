@@ -1,6 +1,84 @@
 {
   "fixtureVersion": "ENAB-602.1",
   "classification": "synthetic-only",
+  "careNetwork": {
+    "classification": "fictional demonstration network",
+    "patientPhoto": "/assets/people/asha-mehta.png",
+    "facilities": {
+      "clinic": { "display": "Meadowbrook Community Clinic", "shortDisplay": "Meadowbrook Clinic" },
+      "diagnostics": { "display": "Meridian Diagnostics Centre", "shortDisplay": "Meridian Diagnostics" },
+      "dayCare": { "display": "Willow Day-care Unit", "shortDisplay": "Willow Day-care Unit" },
+      "hospital": { "display": "Central Hospital", "shortDisplay": "Central Hospital" }
+    },
+    "people": {
+      "careCoordinator": {
+        "id": "SYN-PRAC-3002",
+        "display": "Kavya Rao",
+        "role": "Care Coordinator",
+        "organization": "Meadowbrook Community Clinic",
+        "photo": "/assets/people/kavya-rao.png"
+      },
+      "clinicPhysician": {
+        "id": "SYN-PRAC-3001",
+        "display": "Dr Neha Kapoor",
+        "role": "Clinic physician",
+        "organization": "Meadowbrook Community Clinic",
+        "photo": "/assets/people/neha-kapoor.png"
+      },
+      "referralCoordinator": {
+        "id": "SYN-PRAC-3003",
+        "display": "Rohan Malik",
+        "role": "Referral Coordinator",
+        "organization": "Meadowbrook Community Clinic",
+        "photo": "/assets/people/rohan-malik.png"
+      },
+      "receivingClinician": {
+        "id": "SYN-PRAC-3004",
+        "display": "Priya Nair",
+        "role": "Intake nurse",
+        "organization": "Willow Day-care Unit",
+        "photo": "/assets/people/priya-nair.png"
+      }
+    },
+    "systems": {
+      "clinicEhr": {
+        "display": "Meadowbrook Clinic EHR",
+        "owner": "Meadowbrook Community Clinic",
+        "connection": "SMART/FHIR",
+        "qualifier": "Simulated read-only source"
+      },
+      "legacyRis": {
+        "display": "Meridian Legacy RIS",
+        "owner": "Meridian Diagnostics Centre",
+        "connection": "HL7 v2",
+        "qualifier": "Simulated report feed"
+      },
+      "imagingPacs": {
+        "display": "Philips Enterprise Imaging / PACS",
+        "owner": "Meridian Diagnostics Centre",
+        "connection": "DICOM",
+        "qualifier": "Illustrative simulated image source; no live connection"
+      },
+      "continuum": {
+        "display": "ContinuumOS",
+        "owner": "Fictional demonstration workspace",
+        "connection": "Workflow orchestration",
+        "qualifier": "Prototype simulation"
+      },
+      "referralPortal": {
+        "display": "Willow Referral Portal",
+        "owner": "Willow Day-care Unit",
+        "connection": "Referral package and response",
+        "qualifier": "Simulated external exchange"
+      },
+      "schedulingComms": {
+        "display": "Meadowbrook Scheduling & Communications",
+        "owner": "Meadowbrook Community Clinic",
+        "connection": "Scheduling and message evidence",
+        "qualifier": "Simulated operational source"
+      }
+    }
+  },
   "episode": {
     "id": "SYN-EP-8001",
     "patientRef": "Patient/SYN-PAT-1001",
@@ -17,7 +95,7 @@
     "assignedRole": "Clinic physician",
     "dueAt": "2026-07-18T15:15:00+05:30"
   },
-  "patient": { "resourceType": "Patient", "id": "SYN-PAT-1001", "display": "Asha Mehta (synthetic)" },
+  "patient": { "resourceType": "Patient", "id": "SYN-PAT-1001", "display": "Asha Mehta", "age": 48 },
   "encounter": { "resourceType": "Encounter", "id": "SYN-ENC-2001", "subject": "Patient/SYN-PAT-1001" },
   "serviceRequest": {
     "resourceType": "ServiceRequest",
@@ -53,7 +131,15 @@
       "basedOn": "ServiceRequest/SYN-SR-4001",
       "resultRefs": ["Observation/SYN-OBS-5002"],
       "issuedAt": "2026-07-18T13:30:00+05:30",
-      "priorVersion": "1"
+      "priorVersion": "1",
+      "study": "Abdominal ultrasound",
+      "imageRef": "/assets/synthetic-gallbladder-ultrasound.png",
+      "imageAlt": "Demonstration grayscale abdominal ultrasound illustration showing a gallbladder with a single echogenic focus and posterior acoustic shadowing.",
+      "findings": [
+        "The gallbladder contains a single approximately 8 mm echogenic focus with posterior acoustic shadowing.",
+        "No gallbladder wall thickening or pericholecystic fluid is represented."
+      ],
+      "impression": "Cholelithiasis without sonographic evidence of acute cholecystitis."
     }
   ],
   "completionEvents": [

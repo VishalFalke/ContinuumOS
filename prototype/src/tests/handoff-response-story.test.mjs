@@ -5,6 +5,7 @@ import { evaluateReferralPackage, recordReferralRoute } from '../domain/referral
 import { evaluateReceivingResponse } from '../domain/receiving-response-controller.mjs'
 
 const appUrl = new URL('../app/App.tsx', import.meta.url)
+const cssUrl = new URL('../styles/global.css', import.meta.url)
 
 const completePackage = {
   actorRole: 'Referral Coordinator',
@@ -49,6 +50,16 @@ test('SCR-05 makes every approved routing requirement visible before the existin
   assert.equal(evaluateReferralPackage({ ...completePackage, destination: '' }).allowed, false)
   assert.equal(evaluateReferralPackage({ ...completePackage, requiredFieldsComplete: false }).allowed, false)
   assert.equal(evaluateReferralPackage({ ...completePackage, clinicalApprovalId: '' }).allowed, false)
+})
+
+test('SCR-05 gives each checklist status marker a dedicated aligned badge column', async () => {
+  const css = await readFile(cssUrl, 'utf8')
+  assert.match(css, /\.routing-requirements li \{[\s\S]*grid-template-columns: 1\.5rem minmax\(0, 1fr\);/)
+  assert.match(css, /\.routing-requirements li::before \{[\s\S]*grid-column: 1;[\s\S]*grid-row: 1 \/ span 2;/)
+  assert.match(css, /\.routing-requirements li\.complete::before \{ background: #d8f2ef;/)
+  assert.match(css, /\.routing-requirements li\.blocked::before \{ background: #fff0d5;/)
+  assert.match(css, /\.routing-requirements li strong \{[^}]*grid-column: 2;/)
+  assert.match(css, /\.routing-requirements li span \{[^}]*grid-column: 2;/)
 })
 
 test('SCR-05 shows package and send-attempt evidence only after the existing route controller succeeds', async () => {

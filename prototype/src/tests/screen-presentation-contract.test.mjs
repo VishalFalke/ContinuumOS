@@ -13,7 +13,7 @@ test('each approved screen has a presentation contract with role, handoff and sc
 
 test('direct-route wording is a presentation notice and does not create authentication or workflow authority', async () => {
   const contract = await readFile(contractUrl, 'utf8')
-  assert.match(contract, /Demonstration view — simulated launch not established/)
+  assert.match(contract, /Demonstration view — secure launch not completed/)
   assert.match(contract, /if \(screenId === 'SCR-01' \|\| launchEstablished\) return null/)
   assert.doesNotMatch(contract, /from '\.\.\/domain\//)
   assert.doesNotMatch(contract, /\buseState\b|window\.location|navigateTo/)
@@ -23,5 +23,5 @@ test('AI and cross-screen scenario boundaries remain explicit in the presentatio
   const contract = await readFile(contractUrl, 'utf8')
   assert.match(contract, /AI cannot diagnose, acknowledge, choose direction, approve, route, accept, reject, confirm or close work/)
   assert.match(contract, /represented scenarios rather than a persisted assignment/)
-  assert.match(contract, /does not receive live response data from SCR-06/)
+  assert.match(contract, /does not receive live response data from the receiving-team response view/)
 })

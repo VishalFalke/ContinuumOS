@@ -9,19 +9,29 @@ const appUrl = new URL('../app/App.tsx', import.meta.url)
 
 test('SCR-03 exposes the exact current source, assigned owner and human acknowledgement boundary before action', async () => {
   const app = await readFile(appUrl, 'utf8')
-  assert.match(app, /Read-only source report/)
-  assert.match(app, /\{report\.id\} · current v\{report\.version\}/)
-  assert.match(app, /<dt>Issued<\/dt><dd>\{report\.issuedAt\}<\/dd>/)
-  assert.match(app, /Assigned reviewer/)
-  assert.match(app, /Acknowledgement records that the assigned Clinic physician reviewed this exact source version/)
+  assert.match(app, /<SyntheticReportDocument report=\{report\} \/>/)
+  assert.match(app, /Clinical result review/)
+  assert.match(app, /Acknowledgement records that Dr Neha Kapoor reviewed this exact source version/)
   assert.match(app, /It does not diagnose, approve a referral or select the follow-up direction/)
+})
+
+test('the approved demonstration report presents bounded findings, impression and a non-diagnostic image', async () => {
+  const shell = await readFile(new URL('../components/PrototypeShell.tsx', import.meta.url), 'utf8')
+  const fixture = JSON.parse(await readFile(new URL('../fixtures/synthetic-tracer.json', import.meta.url), 'utf8'))
+  const report = fixture.diagnosticReports.find((item) => item.version === '2')
+  assert.match(shell, /Abdominal-ultrasound report/)
+  assert.match(shell, /Source-linked evidence/)
+  assert.equal(report.imageRef, '/assets/synthetic-gallbladder-ultrasound.png')
+  assert.equal(report.findings.length, 2)
+  assert.match(report.impression, /Cholelithiasis/)
+  assert.match(shell, /not for diagnosis/)
 })
 
 test('SCR-03 success evidence appears only after the existing acknowledgement controller allows the action', async () => {
   const app = await readFile(appUrl, 'utf8')
   assert.match(app, /outcome\.allowed \? setAcknowledgedAt\(acknowledgementAudit\.timestamp\)/)
   assert.match(app, /acknowledgedAt \? <><div className="status-panel" role="status"/)
-  assert.match(app, /Actor: \{acknowledgementAudit\.actor\} · recorded at \{acknowledgedAt\} · \{acknowledgementAudit\.event\}/)
+  assert.match(app, /Actor: Dr Neha Kapoor · Meadowbrook Community Clinic · recorded at \{acknowledgedAt\} · \{acknowledgementAudit\.event\}/)
 
   const outcome = evaluateAcknowledgement(fixture, {
     actorRef: fixture.reviewAssignment.assignedTo,
@@ -36,7 +46,7 @@ test('SCR-03 success evidence appears only after the existing acknowledgement co
 test('SCR-04 begins from represented acknowledgement context without claiming SCR-03 persistence', async () => {
   const app = await readFile(appUrl, 'utf8')
   assert.match(app, /Report context · read only/)
-  assert.match(app, /Current report and acknowledgement evidence are shown for this synthetic case/)
+  assert.match(app, /Current report and acknowledgement evidence are shown for this case/)
   assert.match(app, /Saved for this screen\. Continue below to review the referral package; no data is transferred automatically/)
   assert.match(app, /Open referral handoff/)
   assert.match(app, /onViewNext=\{\(\) => requestNavigation\('SCR-04'\)\}/)

@@ -1,121 +1,96 @@
 # ContinuumOS
 
-> A portfolio case study for an AI-assisted healthcare workflow that helps teams track diagnostic results, clinician review, referrals and next-step confirmation—while keeping clinical decisions human-controlled.
+> An independent portfolio case study for an AI-assisted diagnostic-closure workflow. It makes the path from a result being available to a human-confirmed next care step visible, attributable and recoverable.
 
-## Overview
+[View the final case study (PDF)](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/ContinuumOS.pdf) · [Run the local prototype](#run-the-local-prototype) · [Read the evidence pack](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/final_portfolio_evidence_pack.md)
 
-ContinuumOS is a hypothetical care-orchestration overlay for the diagnostic-closure workflow: the period between a diagnostic result becoming available and the next human-confirmed care step.
+[![ContinuumOS case-study cover](docs/assets/continuumos-case-study-cover-01.png)](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/ContinuumOS.pdf)
 
-The case explores how authorised clinic, diagnostic and receiving-team users could see verified context, workflow state, ownership, blockers, handoff evidence and audit history without replacing the source EHR.
+The PDF above is the primary portfolio artifact. Select the cover to open or download the full case study.
 
-All patient, encounter and workflow data in this repository is synthetic.
+## What this repository demonstrates
 
-## First-adopter boundary
-
-The long-term context is accountable continuity across an integrated Indian care network. The first credible adoption context is narrower: **one diagnostic-closure pathway within one provider network**, initially spanning clinic, diagnostics and receiving-team coordination. Hospital-wide operations, discharge and home recovery remain roadmap context, not MVP scope.
-
-## The problem addressed
-
-A result being available does not prove that it has been clinically reviewed, has an accountable owner or has been converted into a safe next step. ContinuumOS defines a bounded workflow to make those gaps visible and recoverable.
-
-**Portfolio framing:** Integrated Indian healthcare networks need more than connected data. When care moves between clinic, diagnostics, specialist, hospital and home-recovery settings, teams need accountable workflow continuity: a verified result, a human decision, a named owner, an accepted handoff where required and a confirmed next step. ContinuumOS is the in-house orchestration layer for that gap.
-
-This hypothetical case is relevant to emerging integrated care networks in Pune and other Indian metros. It does not claim a relationship, deployment or integration with any named healthcare operator or technology vendor.
+ContinuumOS is a hypothetical care-orchestration overlay, not an EHR replacement. The bounded MVP follows one diagnostic-closure workflow:
 
 ```text
-Diagnostic result available
-  → clinician review and acknowledgement
-  → human follow-up direction
-  → referral handoff or clinic-management work
-  → receiving response where required
-  → next step confirmed
-  → scoped diagnostic-closure workflow completion
+Result available
+  -> clinician acknowledgement
+  -> human follow-up direction
+  -> referral handoff or clinic-management work
+  -> receiving response where required
+  -> next step confirmed or documented exception
 ```
 
-## Product principles
+The repository brings together product framing, operating-model decisions, requirements, architecture, a runnable React prototype, controlled test evidence and a final interview-ready case study.
 
-- Source systems remain authoritative; ContinuumOS is an overlay, not an EHR replacement.
-- Clinical acknowledgement, follow-up direction, referral acceptance, financial authorisation and scoped closure remain human-controlled.
-- Exceptions such as uncertain identity, incomplete results, duplicate events and unavailable clinicians stay visible until safely resolved.
-- Audit history is attributable and append-oriented; corrections do not erase prior evidence.
-- AI is optional and cannot be required for safe workflow progression.
+## Start here
 
-## How the layers fit together
+| If you want to... | Open |
+|---|---|
+| Understand the case in a few minutes | [Final case study PDF](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/ContinuumOS.pdf) |
+| Explore the interactive workflow | [Run the local prototype](#run-the-local-prototype) |
+| Review final claims and limits | [Final portfolio evidence pack](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/final_portfolio_evidence_pack.md) |
+| Inspect requirements and traceability | [Sprint 5 baseline](Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md) and [requirements traceability matrix](Sprints/Sprint_5_Clickable_Prototype/requirements_traceability_matrix.csv) |
+| Inspect safety and AI controls | [Hazard and control register](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/product_safety_hazard_and_control_register.csv) and [AI service cards](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/ai_service_cards_and_control_matrix.md) |
+| See the detailed project record | [Project status](STATUS.md) |
 
-The detailed logical diagram and its evidence boundaries are in [the Sprint 4 architecture principles](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/architecture_principles_and_boundary.md#integrated-care-network-positioning). In brief: a licensed enterprise data-integration capability may connect source systems; SMART on FHIR provides authorised application access; ContinuumOS manages the internal workflow layer. These are complementary layers, not one claimed vendor implementation.
+## Run the local prototype
 
-## Controlled AI boundary
+The prototype is a local, synthetic demonstration. It has no production backend, live hospital connection, real patient data or model call.
 
-The case permits only two assistive AI capabilities:
+```powershell
+git clone https://github.com/VishalFalke/ContinuumOS.git
+cd ContinuumOS\prototype
+npm install
+npm run dev
+```
 
-1. A source-linked episode summary to help authorised users orient to verified context.
-2. A post-approval referral-handoff draft to help prepare an operational package.
+Open the local URL printed by Vite (normally `http://localhost:5173`). The prototype uses pre-approved synthetic fixtures and represented workflow states; it is designed for exploration, not for clinical use.
 
-AI may not diagnose, determine urgency, match identity, acknowledge a result, choose a pathway, approve or send a referral, accept a referral, confirm a next step or close an episode. Every AI output is a reviewable draft with source references, uncertainty handling and a manual fallback.
+If a Windows-managed folder prevents Vite from using its default configuration loader, start the same local app with:
 
-## Prototype implementation boundary
+```powershell
+node node_modules/vite/bin/vite.js --configLoader runner --host 127.0.0.1
+```
 
-Sprint 6 will build a real interactive frontend backed by project-controlled synthetic JSON, deterministic workflow logic, pre-written AI outputs and visible prototype audit evidence.
+## Product and safety boundary
 
-The prototype will not use a production backend, live hospital API, real AI/model call or source-system write-back. Its purpose is to demonstrate the approved workflow, human controls, failure handling and evidence trace—not production integration or model performance.
+- Clinical acknowledgement, follow-up direction, referral routing, receiving-team response, next-step confirmation and scoped closure remain human-controlled.
+- AI is limited to source-linked, reviewable drafts. It cannot diagnose, choose a pathway, approve or send a referral, accept a referral, confirm a next step or close an episode.
+- Uncertain identity, encounter or event linkage is routed to an exception path rather than silently attached.
+- The prototype uses only synthetic data. It is not clinical advice, production software, clinical validation, regulatory evidence or evidence of a live deployment.
 
-## What this case demonstrates
+## Evidence at a glance
 
-- Bounded problem selection, product strategy and explicit opportunity costs.
-- Healthcare workflow, ownership and human decision-right design.
-- Requirements, traceability, prioritisation and controlled change planning.
-- Proportionate architecture and legacy/API integration judgement.
-- Optional AI assistance with source linkage, human review and manual fallback.
-- Safety, testing, release and validation planning with clear evidence limits.
+| Area | Recorded evidence | Important limit |
+|---|---|---|
+| Prototype quality | TypeScript lint and 85 Node tests passed; browser walkthroughs and an isolated production bundle passed | The standard build remains limited by managed-workspace output permissions |
+| Synthetic pilot | 20 controlled runs of one approved tracer passed | This is not 20 unique episodes, a human task-time study or operational performance evidence |
+| Product refinement | Six documented internal Product Owner findings led to bounded changes and retests | This is internal review, not external reviewer research |
+| AI controls | Source references, authorised human disposition, correction rationale and manual fallback are demonstrated | This is not deployed-model quality, fairness or supplier-assurance evidence |
 
-## Repository structure
+For sources, decisions, retests and open evidence needs, see the [final portfolio evidence pack](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/final_portfolio_evidence_pack.md) and [Sprint 7 change-evidence table](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/change_evidence_table.csv).
+
+## Repository guide
 
 | Area | Contents |
 |---|---|
-| `00_Project_Charter/` | Accepted case boundary, objectives, constraints and evidence status. |
-| `01_Day_1_Product_Framing/` | Product case, workflow model, tracer patient and decision baseline. |
-| `Sprints/Sprint_2_Care_Journey_and_Operating_Model/` | Care journey, decision rights, source-of-record and failure paths. |
-| `Sprints/Sprint_3_Users_Decisions_and_MVP/` | Users, jobs, MVP scope, field mapping and integration assumptions. |
-| `Sprints/Sprint_4_Architecture_and_AI_Operating_Model/` | Logical architecture, simulated SMART/FHIR boundary, AI controls and audit model. |
-| `Sprints/Sprint_5_Clickable_Prototype/` | Requirements baseline, traceability, planned screen specifications and low-fidelity wireframes. |
-| `Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/` | Pre-created build, testing, AI-evaluation, safety and release-control artifacts; execution has not started. |
-| `Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/` | Pre-created reviewer, pilot, evidence and interview-packaging structures; validation has not started. |
+| `00_Project_Charter/` | Case boundary, objectives, constraints and evidence status |
+| `01_Day_1_Product_Framing/` | Product case, workflow model, tracer patient and decision baseline |
+| `Sprints/Sprint_2_Care_Journey_and_Operating_Model/` | Care journey, decision rights, sources of record and failure paths |
+| `Sprints/Sprint_3_Users_Decisions_and_MVP/` | Users, jobs, MVP scope, field mapping and integration assumptions |
+| `Sprints/Sprint_4_Architecture_and_AI_Operating_Model/` | Logical architecture, simulated interoperability boundary, AI controls and audit model |
+| `Sprints/Sprint_5_Clickable_Prototype/` | Requirements baseline, traceability and screen specifications |
+| `Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/` | Prototype, testing, safety and controlled-release evidence |
+| `Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/` | Synthetic-pilot evidence, change record, final PDF and final presentation |
+| `prototype/` | Runnable React and Vite prototype with synthetic fixtures and tests |
 
-## Current status
+## Delivery position
 
-Sprints 1–5 are complete. Sprint 5 is the approved requirements and solution baseline for ten prototype screens.
+Sprints 1 through 7 are complete as a local synthetic portfolio package. The retained final presentation is `ContinuumOS.pptx`; the featured PDF above contains the same portfolio case in a GitHub-friendly format.
 
-Sprint 6 is next but has **not started**. Sprint 6–7 plans, control artifacts and evidence templates were created in advance; they are not implementation, test, reviewer or pilot evidence. No clickable prototype, live integration, deployed model, user research, clinical validation or outcome claim is made.
+External structured reviewer sessions were explicitly waived for this portfolio case. The repository does not represent internal Product Owner feedback as external research, and it retains open real-world evidence needs: external review, clinical validation, live operational performance, fairness evaluation, production security assurance and external-model supplier assurance.
 
-Sprint 6 must build from the approved Sprint 5 baseline and use formal change control. See the [project status](STATUS.md) for the detailed evidence-readiness view.
+## License and use
 
-## Key artifacts
-
-- [Portfolio case-study summary](portfolio_case_study_summary.md)
-- [Hospital-systems discovery context and problem coverage](hospital_systems_discovery_and_problem_coverage.md)
-- [Business requirements baseline](Sprints/Sprint_5_Clickable_Prototype/brd_lite.md)
-- [Prototype-readiness review and approved baseline](Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md)
-- [Screen specifications and low-fidelity wireframes](Sprints/Sprint_5_Clickable_Prototype/screen_specifications_and_wireframe_pack.md)
-- [Requirements traceability matrix](Sprints/Sprint_5_Clickable_Prototype/requirements_traceability_matrix.csv)
-- [Simplified architecture and prototype runtime](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/simplified_architecture.md)
-- [AI service cards and control matrix](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/ai_service_cards_and_control_matrix.md)
-- [Sprint 6 build and controlled-release plan](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/prototype_build_and_release_plan.md)
-- [AI evaluation rubric and release thresholds](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/ai_evaluation_rubric_and_release_thresholds.md)
-- [Product safety hazard-and-control register](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/product_safety_hazard_and_control_register.csv)
-- [Sprint 7 interview presentation outline](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/interview_presentation_outline.md)
-- [Project status](STATUS.md)
-
-## Recommended interviewer reading path
-
-Start with these six headline areas; the remaining controls provide supporting delivery evidence.
-
-1. [Product case, selection rationale and strategy](portfolio_case_study_summary.md).
-2. [Workflow, ownership and human decision model](Sprints/Sprint_2_Care_Journey_and_Operating_Model/care_episode_operating_model.md).
-3. [Approved requirements and prototype-readiness baseline](Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md).
-4. [Architecture, interoperability and AI operating boundary](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/architecture_principles_and_boundary.md).
-5. [Wider hospital-system context and explicit coverage boundaries](hospital_systems_discovery_and_problem_coverage.md).
-6. [Wireframes](Sprints/Sprint_5_Clickable_Prototype/screen_specifications_and_wireframe_pack.md), followed by clickable-prototype and validation evidence when Sprint 6–7 execution is completed.
-
-## Scope note
-
-This repository is an independent portfolio case study. It uses synthetic data only and is not production software, clinical advice, a clinical validation study or evidence of regulatory compliance.
+This repository is provided for portfolio review and local exploration. Please preserve the synthetic-data and non-production boundaries when sharing or adapting the work.
