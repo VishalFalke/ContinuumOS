@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { APPROVED_SCREENS, type ScreenId } from '../app/screen-contract'
 import { directRouteNotice, presentationForScreen } from '../app/screen-presentation-contract'
 import fixture from '../fixtures/synthetic-tracer.json'
+import { personForScreen } from './CareNetworkContext'
 
 export type SimulatedSession = {
   displayName: string
@@ -19,23 +20,34 @@ export function sessionForScreen(screenId: ScreenId): SimulatedSession {
   return { displayName: presentation.sessionLabel.split(' — ')[0], role: presentation.representedRole }
 }
 
-function ModalDialog({ children, labelledBy, onClose, open, returnFocusId }: { children: ReactNode; labelledBy: string; onClose: () => void; open: boolean; returnFocusId?: string }) {
+export function ModalDialog({ children, initialFocusId, labelledBy, onClose, open, returnFocusId }: { children: ReactNode; initialFocusId?: string; labelledBy: string; onClose: () => void; open: boolean; returnFocusId?: string }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const returnFocusRef = useRef<HTMLElement | null>(null)
   useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return
+    let resetFrame: number | undefined
     if (open && !dialog.open) {
       const configuredReturnTarget = returnFocusId ? document.getElementById(returnFocusId) : null
       returnFocusRef.current = configuredReturnTarget ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null)
       dialog.showModal()
+      dialog.scrollTop = 0
+      const initialFocusTarget = initialFocusId ? document.getElementById(initialFocusId) : null
+      initialFocusTarget?.focus({ preventScroll: true })
+      resetFrame = window.requestAnimationFrame(() => {
+        dialog.scrollTop = 0
+        initialFocusTarget?.focus({ preventScroll: true })
+      })
     }
     if (!open && dialog.open) dialog.close()
     if (!open && returnFocusRef.current) {
       returnFocusRef.current.focus()
       returnFocusRef.current = null
     }
-  }, [open, returnFocusId])
+    return () => {
+      if (resetFrame !== undefined) window.cancelAnimationFrame(resetFrame)
+    }
+  }, [initialFocusId, open, returnFocusId])
   return <dialog aria-labelledby={labelledBy} className="prototype-dialog" onCancel={(event) => { event.preventDefault(); onClose() }} onClose={onClose} onKeyDown={(event) => { if (event.key === 'Escape') { event.preventDefault(); onClose() } }} ref={dialogRef}>{children}</dialog>
 }
 
@@ -60,27 +72,29 @@ const CURRENT_SYNTHETIC_REPORT = fixture.diagnosticReports.find((item) => item.i
 
 export function SyntheticReportDocument({ report }: { report: SyntheticReport }) {
   const supportingObservations = fixture.observations.filter((observation) => report.resultRefs.includes(`Observation/${observation.id}`))
-  return <article aria-label={`Synthetic diagnostic report ${report.id} version ${report.version}`} className="report-document">
-    <header className="report-document-header"><div><p className="panel-label">Synthetic abdominal-ultrasound report · read only</p><h3>Diagnostic report</h3><p>{report.id} · version {report.version}</p></div><span className="report-version-badge">{report.status} · current version</span></header>
-    <dl className="report-document-demographics"><div><dt>Patient</dt><dd>{fixture.patient.display}</dd></div><div><dt>Encounter</dt><dd>{report.encounter}</dd></div><div><dt>Issued</dt><dd>{report.issuedAt}</dd></div><div><dt>Source order</dt><dd>{report.basedOn}</dd></div></dl>
-    <section><h4>Study</h4><p>{report.study ?? 'Synthetic diagnostic-closure demonstration'}</p></section>
-    {report.imageRef && <figure className="report-image"><img alt={report.imageAlt ?? 'Synthetic diagnostic report illustration'} src={report.imageRef} /><figcaption><strong>Synthetic demonstration image</strong><span>AI-generated illustration · not source-system imaging · not for diagnosis</span></figcaption></figure>}
+  const issuedAt = new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata' }).format(new Date(report.issuedAt))
+  return <article aria-label={`Diagnostic report ${report.id} version ${report.version}`} className="report-document">
+    <header className="report-document-header"><div><p className="panel-label">Abdominal-ultrasound report · read only</p><h3>Diagnostic report</h3><p>{report.id} · version {report.version}</p></div><span className="report-version-badge">{report.status} · current version</span></header>
+    <dl className="report-document-demographics"><div><dt>Patient</dt><dd>{fixture.patient.display} · {fixture.patient.age} years</dd></div><div><dt>Performed at</dt><dd>Meridian Diagnostics Centre</dd></div><div><dt>Issued</dt><dd>{issuedAt} IST</dd></div><div><dt>Ordered by</dt><dd>Dr Neha Kapoor · Meadowbrook Clinic</dd></div><div><dt>Report source</dt><dd>Meridian Legacy RIS · HL7 v2 · {report.encounter}</dd></div><div><dt>Image source</dt><dd>Philips Enterprise Imaging / PACS · DICOM</dd></div><div><dt>Source order</dt><dd>{report.basedOn}</dd></div></dl>
+    <section><h4>Study</h4><p>{report.study ?? 'Diagnostic-closure demonstration'}</p></section>
+    {report.imageRef && <figure className="report-image"><img alt={report.imageAlt ?? 'Demonstration diagnostic report illustration'} src={report.imageRef} /><figcaption><strong>Demonstration image</strong><span>AI-generated illustration · not source-system imaging · not for diagnosis</span></figcaption></figure>}
     <section><h4>Source-linked evidence</h4>{supportingObservations.length ? <ul>{supportingObservations.map((observation) => <li key={observation.id}><strong>Observation/{observation.id}</strong><span>{observation.status} · {observation.basedOn}</span></li>)}</ul> : <p>No approved supporting observation is available.</p>}</section>
-    <section><h4>Findings</h4>{report.findings?.length ? <ul className="report-findings">{report.findings.map((finding) => <li key={finding}>{finding}</li>)}</ul> : <p>No narrative findings are represented in this synthetic report.</p>}</section>
-    <section><h4>Impression</h4><p>{report.impression ?? `No diagnostic impression is represented in synthetic report version ${report.version}.`}</p></section>
-    <aside className="report-synthetic-boundary"><strong>Demonstration boundary</strong><span>This fictional report and AI-generated image are synthetic and non-diagnostic. The Clinic physician remains responsible for reviewing approved source evidence and making the human acknowledgement or follow-up decision.</span></aside>
+    <section><h4>Findings</h4>{report.findings?.length ? <ul className="report-findings">{report.findings.map((finding) => <li key={finding}>{finding}</li>)}</ul> : <p>No narrative findings are represented in this report.</p>}</section>
+    <section><h4>Impression</h4><p>{report.impression ?? `No diagnostic impression is represented in report version ${report.version}.`}</p></section>
+    <aside className="report-synthetic-boundary"><strong>Demonstration boundary</strong><span>This demonstration report and AI-generated image are not for diagnosis. The Clinic physician remains responsible for reviewing source evidence and making the human acknowledgement or follow-up decision.</span></aside>
     {report.priorVersion && <footer><strong>Amendment history</strong><span>Previous version {report.priorVersion} remains historical. This current version requires its own human review.</span></footer>}
   </article>
 }
 
-export function SyntheticReportPreview({ report }: { report: SyntheticReport }) {
+export function SyntheticReportPreview({ label, report }: { label: string; report: SyntheticReport }) {
   const [open, setOpen] = useState(false)
   const titleId = useId()
-  return <><button aria-expanded={open} aria-haspopup="dialog" className="secondary-action synthetic-report-trigger" onClick={() => setOpen(true)} type="button">View report details</button><ModalDialog labelledBy={titleId} onClose={() => setOpen(false)} open={open}><section className="synthetic-report-preview"><h2 className="visually-hidden" id={titleId}>Diagnostic report {report.id}</h2><SyntheticReportDocument report={report} /><p className="synthetic-report-boundary">Preview only. No editing, download, source-system access, audit event or workflow action is available here.</p><button className="secondary-action" onClick={() => setOpen(false)} type="button">Close report</button></section></ModalDialog></>
+  return <><button aria-expanded={open} aria-haspopup="dialog" className="secondary-action synthetic-report-trigger" onClick={() => setOpen(true)} type="button">{label}</button><ModalDialog labelledBy={titleId} onClose={() => setOpen(false)} open={open}><section className="synthetic-report-preview"><h2 className="visually-hidden" id={titleId}>Diagnostic report {report.id}</h2><SyntheticReportDocument report={report} /><p className="synthetic-report-boundary">Preview only. No editing, download, source-system access, audit event or workflow action is available here.</p><button className="secondary-action" onClick={() => setOpen(false)} type="button">Close report</button></section></ModalDialog></>
 }
 
 export function SessionIdentity({ activeScreen, launchEstablished, session }: { activeScreen: ScreenId; launchEstablished: boolean; session: SimulatedSession | null }) {
-  if (activeScreen === 'SCR-01' && !session) return <aside aria-live="polite" className="session-identity" data-role-theme="clinic-physician"><span aria-hidden="true" className="user-avatar">CP</span><span className="session-copy"><span className="session-label">Access preview</span><strong>Clinic physician</strong><span>Access check required</span></span></aside>
+  const person = personForScreen(activeScreen)
+  if (activeScreen === 'SCR-01' && !session) return <aside aria-live="polite" className="session-identity" data-role-theme="clinic-physician">{person ? <img alt="" className="user-avatar user-photo" src={person.photo} /> : <span aria-hidden="true" className="user-avatar">CP</span>}<span className="session-copy"><span className="session-label">Access preview</span><strong>{person?.display ?? 'Clinic physician'}</strong><span>{person ? `${person.role} · ${person.organization}` : 'Access check required'}</span></span></aside>
   const presentation = presentationForScreen(activeScreen)
   const directRoute = directRouteNotice(activeScreen, launchEstablished)
   const screenSession = sessionForScreen(activeScreen)
@@ -94,8 +108,8 @@ export function SessionIdentity({ activeScreen, launchEstablished, session }: { 
   const initials = primaryIdentity.split(' ').filter(Boolean).slice(-2).map((part) => part[0]).join('').toUpperCase()
   const roleTheme = representedSession.role.toLowerCase().replace(/[^a-z]+/g, '-')
   return <aside aria-live="polite" className="session-identity" data-role-theme={roleTheme}>
-    <span aria-hidden="true" className="user-avatar">{initials}</span>
-    <span className="session-copy"><span className="session-label">{previewMode ? 'Viewing as' : 'Signed in as'}</span><strong>{primaryIdentity}</strong>{!repeatedRole && <span>{representedSession.role}</span>}</span>
+    {person ? <img alt="" className="user-avatar user-photo" src={person.photo} /> : <span aria-hidden="true" className="user-avatar">{initials}</span>}
+    <span className="session-copy"><span className="session-label">{previewMode ? 'Viewing as' : 'Signed in as'}</span><strong>{person?.display ?? primaryIdentity}</strong>{person ? <span>{person.role} · {person.organization}</span> : !repeatedRole && <span>{representedSession.role}</span>}</span>
   </aside>
 }
 
@@ -111,13 +125,13 @@ function JourneyList({ activeScreen, onSelect }: { activeScreen: ScreenId; onSel
 }
 
 export function PrototypeJourneyNavigation({ activeScreen, onSelect, orientationScreen }: { activeScreen: ScreenId; onSelect: (screenId: ScreenId) => void; orientationScreen: boolean }) {
-  const reportContext = activeScreen === 'SCR-03' ? 'Current diagnostic report' : activeScreen === 'SCR-05' ? 'Report included in this referral package' : activeScreen === 'SCR-09' ? 'Report referenced in the activity trace' : activeScreen === 'SCR-10' ? 'Report supporting this next-step review' : null
+  const reportSourceTool = activeScreen === 'SCR-04' ? { context: 'Acknowledged diagnostic report', label: 'View acknowledged report' } : activeScreen === 'SCR-05' ? { context: 'Report included in this referral package', label: 'View report in referral package' } : activeScreen === 'SCR-09' ? { context: 'Report referenced in the activity trace', label: 'View report referenced in trace' } : activeScreen === 'SCR-10' ? { context: 'Report supporting this next-step review', label: 'View supporting report' } : null
   if (orientationScreen) return <details className="portfolio-navigation orientation-navigation"><summary>Explore prototype screens</summary><div><p>Portfolio navigation only. Selecting a screen changes the represented user and does not record workflow work.</p><nav aria-label="Prototype screen navigation"><JourneyList activeScreen={activeScreen} onSelect={onSelect} /></nav></div></details>
-  return <>{reportContext && <section aria-label="Report source tools" className="screen-source-tools"><span><span className="panel-label">Source evidence</span><strong>{reportContext}</strong></span><SyntheticReportPreview report={CURRENT_SYNTHETIC_REPORT} /></section>}<details className="portfolio-navigation"><summary>Explore prototype screens</summary><div><p>Portfolio navigation only. Selecting a screen changes the represented user and does not record workflow work.</p><nav aria-label="Prototype screen navigation"><JourneyList activeScreen={activeScreen} onSelect={onSelect} /></nav></div></details></>
+  return <>{reportSourceTool && <section aria-label="Report source tools" className="screen-source-tools"><span><span className="panel-label">Source evidence</span><strong>{reportSourceTool.context}</strong></span><SyntheticReportPreview label={reportSourceTool.label} report={CURRENT_SYNTHETIC_REPORT} /></section>}<details className="portfolio-navigation"><summary>Explore prototype screens</summary><div><p>Portfolio navigation only. Selecting a screen changes the represented user and does not record workflow work.</p><nav aria-label="Prototype screen navigation"><JourneyList activeScreen={activeScreen} onSelect={onSelect} /></nav></div></details></>
 }
 
 export function SimulatedRoleHandoffDialog({ handoff, onCancel, onConfirm }: { handoff: PendingHandoff | null; onCancel: () => void; onConfirm: () => void }) {
   const presentation = handoff ? presentationForScreen(handoff.screenId) : null
   const launchHandoff = handoff?.reason === 'simulated-launch'
-  return <ModalDialog labelledBy="simulated-handoff-title" onClose={onCancel} open={Boolean(handoff)} returnFocusId={launchHandoff ? 'simulated-launch-trigger' : undefined}>{handoff && presentation && <><header><p className="panel-label">{launchHandoff ? 'Simulated launch confirmation' : 'Simulated role handoff'}</p><h2 id="simulated-handoff-title">{launchHandoff ? 'Synthetic launch outcome represented' : `Continue as ${presentation.representedRole}`}</h2><p>{launchHandoff ? 'Minimum read-only synthetic context is available for this portfolio scenario. No credentials were collected, and no durable authentication or permissions were established.' : 'This portfolio demonstration changes the represented viewing role. It does not sign in, grant permissions or change workflow ownership.'}</p></header><dl className="handoff-dialog-summary"><div><dt>Current simulated role</dt><dd>{handoff.fromRole}</dd></div><div><dt>Next represented role</dt><dd>{presentation.representedRole}</dd></div><div><dt>Screen purpose</dt><dd>{presentation.purpose}</dd></div></dl><div className="action-group"><button className="primary-action" onClick={onConfirm} type="button">Continue simulated handoff</button><button className="secondary-action" onClick={onCancel} type="button">Stay on current screen</button></div></>}</ModalDialog>
+  return <ModalDialog labelledBy="simulated-handoff-title" onClose={onCancel} open={Boolean(handoff)} returnFocusId={launchHandoff ? 'simulated-launch-trigger' : undefined}>{handoff && presentation && <><header><p className="panel-label">{launchHandoff ? 'Workspace access confirmation' : 'Role handoff'}</p><h2 id="simulated-handoff-title">{launchHandoff ? 'Episode context is ready' : `Continue as ${presentation.representedRole}`}</h2><p>{launchHandoff ? 'Minimum read-only episode context is available. No credentials were collected, and no durable authentication or permissions were established.' : 'This portfolio view changes the represented viewing role. It does not sign in, grant permissions or change workflow ownership.'}</p></header><dl className="handoff-dialog-summary"><div><dt>Current role</dt><dd>{handoff.fromRole}</dd></div><div><dt>Next represented role</dt><dd>{presentation.representedRole}</dd></div><div><dt>Screen purpose</dt><dd>{presentation.purpose}</dd></div></dl><div className="action-group"><button className="primary-action" onClick={onConfirm} type="button">{launchHandoff ? 'Continue to workspace' : 'Continue role handoff'}</button><button className="secondary-action" onClick={onCancel} type="button">Stay on current screen</button></div></>}</ModalDialog>
 }

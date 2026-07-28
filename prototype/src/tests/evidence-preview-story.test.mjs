@@ -14,12 +14,13 @@ test('COS-6B-08 uses only the approved current synthetic DiagnosticReport fixtur
   assert.match(shell, /report\.priorVersion/)
 })
 
-test('COS-6B-08 provides a labelled read-only synthetic demonstration document', () => {
-  assert.match(shell, /Synthetic abdominal-ultrasound report.*read only/)
+test('COS-6B-08 provides a labelled read-only demonstration document', () => {
+  assert.match(shell, /Abdominal-ultrasound report.*read only/)
+  assert.match(shell, /fixture\.patient\.display\} · \{fixture\.patient\.age\} years/)
   assert.match(shell, /className="report-image"/)
   assert.match(shell, /AI-generated illustration.*not source-system imaging.*not for diagnosis/)
   assert.match(shell, /className="report-findings"/)
-  assert.match(shell, /fictional report and AI-generated image are synthetic and non-diagnostic/)
+  assert.match(shell, /demonstration report and AI-generated image are not for diagnosis/i)
   assert.match(shell, /Preview only\. No editing, download, source-system access, audit event or workflow action is available here/)
   assert.doesNotMatch(shell, /Download synthetic report/)
 })
@@ -33,8 +34,10 @@ test('COS-6B-08 uses the existing native modal recovery controls', () => {
   assert.match(shell, /Close report/)
 })
 
-test('COS-6B-08 exposes the approved preview on mapped report-source screens only', () => {
-  for (const screen of ['SCR-03', 'SCR-05', 'SCR-09', 'SCR-10']) assert.match(shell, new RegExp(`activeScreen === '${screen}'`))
-  assert.match(shell, /<SyntheticReportPreview report=\{CURRENT_SYNTHETIC_REPORT\}/)
+test('COS-6B-08 exposes the approved preview on supporting-evidence screens only', () => {
+  for (const screen of ['SCR-04', 'SCR-05', 'SCR-09', 'SCR-10']) assert.match(shell, new RegExp(`activeScreen === '${screen}'`))
+  assert.doesNotMatch(shell, /activeScreen === 'SCR-03'[^\n]*reportSourceTool/)
+  assert.match(shell, /<SyntheticReportPreview label=\{reportSourceTool\.label\} report=\{CURRENT_SYNTHETIC_REPORT\}/)
+  for (const label of ['View acknowledged report', 'View report in referral package', 'View report referenced in trace', 'View supporting report']) assert.match(shell, new RegExp(label))
   assert.doesNotMatch(shell, /activeScreen === 'SCR-07'[^\n]*SyntheticReportPreview/)
 })

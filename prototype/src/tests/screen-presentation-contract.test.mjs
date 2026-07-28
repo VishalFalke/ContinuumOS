@@ -13,7 +13,7 @@ test('each approved screen has a presentation contract with role, handoff and sc
 
 test('direct-route wording is a presentation notice and does not create authentication or workflow authority', async () => {
   const contract = await readFile(contractUrl, 'utf8')
-  assert.match(contract, /Demonstration view — simulated launch not established/)
+  assert.match(contract, /Demonstration view — secure launch not completed/)
   assert.match(contract, /if \(screenId === 'SCR-01' \|\| launchEstablished\) return null/)
   assert.doesNotMatch(contract, /from '\.\.\/domain\//)
   assert.doesNotMatch(contract, /\buseState\b|window\.location|navigateTo/)

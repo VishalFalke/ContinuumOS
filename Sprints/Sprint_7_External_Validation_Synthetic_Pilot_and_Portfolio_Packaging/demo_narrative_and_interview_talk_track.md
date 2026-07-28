@@ -39,6 +39,12 @@ Separate the talk track into:
 
 Do not populate findings, lessons or product improvements until their test, defect, reviewer or pilot references exist.
 
+### Current pilot evidence
+
+The pilot executed 20 controlled scenario runs against one approved synthetic tracer. The happy path and failure controls passed; four browser-observed actions showed feedback in 0.311–0.748 seconds. This demonstrates deterministic local prototype controls, not human workflow speed, operational performance, clinical safety or AI quality.
+
+The evidence supports a deferred decision: no product change is claimed from the synthetic pilot alone. Structured reviewer feedback is the next evidence source before revising the product.
+
 ## Delivery limit
 
 The prototype demo must be deliverable in under five minutes.
