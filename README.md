@@ -23,16 +23,26 @@ Result available
 
 The repository brings together product framing, operating-model decisions, requirements, architecture, a runnable React prototype, controlled test evidence and a final interview-ready case study.
 
-## Start here
+## Guide: evidence by capability
 
-| If you want to... | Open |
-|---|---|
-| Understand the case in a few minutes | [Final case study PDF](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/ContinuumOS.pdf) |
-| Explore the interactive workflow | [Run the local prototype](#run-the-local-prototype) |
-| Review final claims and limits | [Final portfolio evidence pack](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/final_portfolio_evidence_pack.md) |
-| Inspect requirements and traceability | [Sprint 5 baseline](Sprints/Sprint_5_Clickable_Prototype/prototype_readiness_review_and_approval_baseline.md) and [requirements traceability matrix](Sprints/Sprint_5_Clickable_Prototype/requirements_traceability_matrix.csv) |
-| Inspect safety and AI controls | [Hazard and control register](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/product_safety_hazard_and_control_register.csv) and [AI service cards](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/ai_service_cards_and_control_matrix.md) |
-| See the detailed project record | [Project status](STATUS.md) |
+Start with the case study and prototype, then follow the evidence area most relevant to the role. The links below are intentionally selective: they show how the product decision, requirements, delivery controls and safety boundaries connect.
+
+| Capability | What it demonstrates | Open |
+|---|---|---|
+| Product and healthcare workflow judgement | A bounded diagnostic-closure problem, product trade-offs, human decision gates and a realistic care-coordination workflow. | [Final case study PDF](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/ContinuumOS.pdf), [case-study summary](portfolio_case_study_summary.md) and [exception workflow](Sprints/Sprint_2_Care_Journey_and_Operating_Model/mvp_exception_workflow.md) |
+| Product discovery and MVP definition | Product framing, workflow states, assumptions, success measures and an intentionally constrained MVP rather than an EHR-replacement claim. | [Product case foundation](01_Day_1_Product_Framing/product_case_foundation.md), [MVP scope](01_Day_1_Product_Framing/mvp_scope.md) and [success metrics](01_Day_1_Product_Framing/success_metrics.md) |
+| BRD, functional and non-functional requirements | A concise business requirements baseline, functional rules, non-functional controls, users, scope boundaries and acceptance-ready requirements. | [BRD-lite](Sprints/Sprint_5_Clickable_Prototype/brd_lite.md), [consolidated requirements register](Sprints/Sprint_5_Clickable_Prototype/consolidated_requirements_register.csv) and [business-rule and validation catalogue](Sprints/Sprint_5_Clickable_Prototype/business_rule_and_validation_catalogue.md) |
+| Lead BA traceability | End-to-end traceability from workflow and business rules to screens, acceptance criteria and controlled prototype evidence. | [Requirements traceability matrix](Sprints/Sprint_5_Clickable_Prototype/requirements_traceability_matrix.csv), [acceptance criteria catalogue](Sprints/Sprint_5_Clickable_Prototype/acceptance_criteria_catalogue.md) and [four-diagram traceability pack](Sprints/Sprint_5_Clickable_Prototype/four_diagram_traceability_pack.md) |
+| Agile delivery and stakeholder control | Prioritisation, accountable decision rights, risk/dependency management, sprint planning, defect triage and release readiness. | [MoSCoW impact/effort matrix](Sprints/Sprint_5_Clickable_Prototype/moscow_impact_effort_prioritisation_matrix.csv), [RACI and decision-authority matrix](Sprints/Sprint_5_Clickable_Prototype/raci_and_decision_authority_matrix.csv), [RAID register](Sprints/Sprint_5_Clickable_Prototype/raid_register.csv), [Jira-style delivery backlog](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/jira_style_sprint_6_delivery_backlog.md) and [defect triage matrix](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/defect_log_and_triage_matrix.csv) |
+| AI product management and safety | Narrow AI use cases; source-linked output; human review, edit/reject and manual fallback; prohibited autonomous actions; release gates and recovery controls. | [AI service cards and control matrix](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/ai_service_cards_and_control_matrix.md), [product safety hazard/control register](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/product_safety_hazard_and_control_register.csv) and [go/no-go and rollback criteria](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/go_no_go_rollback_and_pilot_entry_criteria.md) |
+| AI evaluation | A controlled rubric, review disposition and release thresholds for the two permitted AI assists. | [AI evaluation rubric and thresholds](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/ai_evaluation_rubric_and_release_thresholds.md) and [AI evaluation results](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/ai_evaluation_results.csv) |
+| Workflow observability and auditability | The proposed event, audit and recovery model required to make workflow progress, human decisions, exceptions, corrections and AI review attributable. | [Audit and analytics data contract](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/audit_and_analytics_data_contract.md), [event catalogue and recovery rules](Sprints/Sprint_4_Architecture_and_AI_Operating_Model/event_catalogue_and_recovery_rules.md) and [audit-trace requirement](Sprints/Sprint_5_Clickable_Prototype/consolidated_requirements_register.csv) |
+| Product execution | A runnable, synthetic React prototype that makes workflow state, owner, evidence, exception recovery and AI review visible. | [Run the local prototype](#run-the-local-prototype), [screen specifications](Sprints/Sprint_5_Clickable_Prototype/screen_specifications_and_wireframe_pack.md) and [test execution evidence](Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/test_execution_evidence.csv) |
+| Evidence discipline | Clear separation of what was tested locally from what requires real-world clinical, operational, security, fairness and model-supplier validation. | [Final portfolio evidence pack](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/final_portfolio_evidence_pack.md), [synthetic-pilot method](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/synthetic_pilot_dataset_and_method.md) and [change-evidence table](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/change_evidence_table.csv) |
+
+### Important evidence boundary
+
+The AI evaluation is controlled synthetic-output evaluation, not deployed-model performance evidence. The audit and event artifacts specify workflow observability and auditability; this local prototype does not claim live telemetry, alerting, model-drift monitoring or a production incident-monitoring service. See the [final portfolio evidence pack](Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/final_portfolio_evidence_pack.md) for the retained limits and required next-stage validation.
 
 ## Run the local prototype
 
@@ -84,12 +94,6 @@ For sources, decisions, retests and open evidence needs, see the [final portfoli
 | `Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/` | Prototype, testing, safety and controlled-release evidence |
 | `Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/` | Synthetic-pilot evidence, change record, final PDF and final presentation |
 | `prototype/` | Runnable React and Vite prototype with synthetic fixtures and tests |
-
-## Delivery position
-
-Sprints 1 through 7 are complete as a local synthetic portfolio package. The retained final presentation is `ContinuumOS.pptx`; the featured PDF above contains the same portfolio case in a GitHub-friendly format.
-
-External structured reviewer sessions were explicitly waived for this portfolio case. The repository does not represent internal Product Owner feedback as external research, and it retains open real-world evidence needs: external review, clinical validation, live operational performance, fairness evaluation, production security assurance and external-model supplier assurance.
 
 ## License and use
 
