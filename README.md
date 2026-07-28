@@ -23,7 +23,7 @@ Result available
 
 The repository brings together product framing, operating-model decisions, requirements, architecture, a runnable React prototype, controlled test evidence and a final interview-ready case study.
 
-## Interviewer guide: evidence by capability
+## Guide: evidence by capability
 
 Start with the case study and prototype, then follow the evidence area most relevant to the role. The links below are intentionally selective: they show how the product decision, requirements, delivery controls and safety boundaries connect.
 
@@ -94,12 +94,6 @@ For sources, decisions, retests and open evidence needs, see the [final portfoli
 | `Sprints/Sprint_6_Prototype_Build_Testing_and_Controlled_Release/` | Prototype, testing, safety and controlled-release evidence |
 | `Sprints/Sprint_7_External_Validation_Synthetic_Pilot_and_Portfolio_Packaging/` | Synthetic-pilot evidence, change record, final PDF and final presentation |
 | `prototype/` | Runnable React and Vite prototype with synthetic fixtures and tests |
-
-## Delivery position
-
-Sprints 1 through 7 are complete as a local synthetic portfolio package. The retained final presentation is `ContinuumOS.pptx`; the featured PDF above contains the same portfolio case in a GitHub-friendly format.
-
-External structured reviewer sessions were explicitly waived for this portfolio case. The repository does not represent internal Product Owner feedback as external research, and it retains open real-world evidence needs: external review, clinical validation, live operational performance, fairness evaluation, production security assurance and external-model supplier assurance.
 
 ## License and use
 
