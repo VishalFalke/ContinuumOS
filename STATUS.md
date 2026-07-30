@@ -2,11 +2,15 @@
 
 ## Last updated
 
-2026-07-28
+2026-07-30
 
 ## Current position
 
 ### Current status
+
+- Portfolio fast-path and evidence-index update (2026-07-30): six designation-neutral, derived reading artifacts now make the existing product, workflow, decision, UAT, traceability, data, AI-governance and future-readiness evidence directly scannable from the root README. The new case-at-a-glance, decision/trade-off story, UAT business-reasoning readout, data-governance overview, future-pilot readiness view and curated artifact index link only to recorded source artifacts and distinguish designed, locally implemented, synthetically tested, simulated and future evidence. The README now opens with six evidence routes before the retained eight-diagram gallery. No product scope, prototype code, workflow, authority, requirement, architecture, dependency, integration, test result or AI-safety control changed.
+
+- Repository diagram-gallery update (2026-07-30): the root README now renders eight repository-native Mermaid diagrams inline: care journey/MVP boundary, business process, logical architecture, coded-prototype runtime, simulated SMART on FHIR sequence, cross-screen data flow, logical data relationships and state lifecycle. Each diagram links to its governing artifact and states its design, simulation or implementation boundary. No diagram, workflow, authority, dependency, integration or AI-safety control changed; this is a portfolio-navigation enhancement only.
 
 - Repository landing-page update (2026-07-28): the root README now presents the completed portfolio package, links the final PDF as the primary case-study artifact, provides local prototype instructions and states the recorded evidence and limitations. A read-only rendering of the PDF's first page was added under `docs/assets/` solely for GitHub preview. No prototype code, source artifact, workflow, authority, dependency, integration or AI-safety control changed.
 
