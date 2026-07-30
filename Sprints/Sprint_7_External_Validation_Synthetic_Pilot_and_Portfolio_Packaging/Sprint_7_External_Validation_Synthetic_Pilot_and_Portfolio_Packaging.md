@@ -15,6 +15,7 @@ Validate the workflow with relevant reviewers, measure prototype performance usi
 7. Final interview presentation — `ContinuumOS.pptx`
 8. Final portfolio delivery narrative — represented in the retained final presentation
 9. Competitive-approach evidence plan and optional sourced appendix — `competitive_approach_evidence_plan.md`
+10. Designation-neutral portfolio fast path and derived evidence index — `portfolio_artifact_index.md` plus five linked reading views
 
 ## Artifact readiness at Sprint 7 entry
 
@@ -68,6 +69,8 @@ The final evidence pack will distinguish project-governance evidence from clinic
 - [ ] Not started
 - [ ] In progress
 - [x] Complete
+
+- Portfolio fast-path and evidence-index update (2026-07-30): six designation-neutral, derived reading artifacts now make the existing product, workflow, decision, UAT, traceability, data, AI-governance and future-readiness evidence directly scannable from the root README. The new case-at-a-glance, decision/trade-off story, UAT business-reasoning readout, data-governance overview, future-pilot readiness view and curated artifact index link only to recorded source artifacts and distinguish designed, locally implemented, synthetically tested, simulated and future evidence. The README now opens with six evidence routes before the retained eight-diagram gallery. Markdown/link and Mermaid-fence validation passed. No product scope, prototype code, workflow, authority, requirement, architecture, dependency, integration, test result or AI-safety control changed.
 
 - Repository diagram-gallery update (2026-07-30): the root README now renders eight repository-native Mermaid diagrams inline: care journey/MVP boundary, business process, logical architecture, coded-prototype runtime, simulated SMART on FHIR sequence, cross-screen data flow, logical data relationships and state lifecycle. Each diagram links to its governing artifact and states its design, simulation or implementation boundary. No diagram, workflow, authority, dependency, integration or AI-safety control changed; this is a portfolio-navigation enhancement only.
 
