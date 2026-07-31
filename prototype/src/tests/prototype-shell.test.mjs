@@ -58,6 +58,15 @@ test('App places direct-route context in the workspace rather than the top bar',
   assert.match(css, /\.direct-route-notice \{[\s\S]*order: 4;/)
 })
 
+test('App renders one accessible portfolio attribution footer outside the shared workspace', async () => {
+  const app = await readFile(appUrl, 'utf8')
+  const css = await readFile(cssUrl, 'utf8')
+  assert.match(app, /<footer className="prototype-footer">[\s\S]*© 2026 ContinuumOS[\s\S]*Vishal Falke · AI Product Manager/)
+  assert.match(app, /href="https:\/\/www\.linkedin\.com\/in\/vishal-falke04"/)
+  assert.match(css, /\.prototype-footer \{[\s\S]*grid-template-columns: 1fr auto 1fr;/)
+  assert.match(css, /@media \(max-width: 700px\) \{[\s\S]*\.prototype-footer \{ gap: \.3rem; grid-template-columns: 1fr;/)
+})
+
 test('interviewer-facing screen eyebrows do not expose internal story or screen numbers', async () => {
   const app = await readFile(appUrl, 'utf8')
   assert.doesNotMatch(app, /<p className="eyebrow">SCR-/)
@@ -79,4 +88,9 @@ test('the header keeps the named session at the far right and gives the boundary
   assert.match(css, /\.session-identity \{[\s\S]*margin-left: 0;/)
   assert.match(css, /\.task-workspace main \{ max-width: 96rem; \/\* wide-task-layout \*\//)
   assert.match(css, /\.prototype-disclaimer \{[^}]*white-space: nowrap;/)
+})
+
+test('the ContinuumOS brand is an accessible link to the prototype home screen', async () => {
+  const app = await readFile(appUrl, 'utf8')
+  assert.match(app, /<a aria-label="ContinuumOS home" className="brand-block brand-home-link" href="#start">/)
 })
